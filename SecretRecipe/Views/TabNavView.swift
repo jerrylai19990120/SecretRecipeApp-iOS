@@ -43,9 +43,12 @@ struct TabNavView: View {
                             Image(systemName: "star")
                                 .font(.system(size: gr.size.width*0.06, weight: .bold))
                                 .foregroundColor(self.selectionIndex==0 ? .black : .init(white: 0.8))
+                            if self.selectionIndex == 0 {
+                                Circle().frame(width: gr.size.width*0.016, height: gr.size.width*0.04)
+                                    .foregroundColor(.black)
+                            }
                             
-                            Text("Daily")
-                                .foregroundColor(self.selectionIndex==0 ? .black : .init(white: 0.8))
+                            
                         }
                     }
                     Spacer()
@@ -56,9 +59,12 @@ struct TabNavView: View {
                             Image(systemName: "book")
                                 .font(.system(size: gr.size.width*0.06, weight: .bold))
                                 .foregroundColor(self.selectionIndex==1 ? .black : .init(white: 0.8))
+                            if self.selectionIndex == 1 {
+                                Circle().frame(width: gr.size.width*0.016, height: gr.size.width*0.04)
+                                    .foregroundColor(.black)
+                            }
                             
-                            Text("Recipes")
-                                .foregroundColor(self.selectionIndex==1 ? .black : .init(white: 0.8))
+                            
                         }
                     }
                     Spacer()
@@ -69,9 +75,12 @@ struct TabNavView: View {
                             Image(systemName: "heart")
                                 .font(.system(size: gr.size.width*0.06, weight: .bold))
                                 .foregroundColor(self.selectionIndex==2 ? .black : .init(white: 0.8))
+                            if self.selectionIndex == 2 {
+                                Circle().frame(width: gr.size.width*0.016, height: gr.size.width*0.04)
+                                    .foregroundColor(.black)
+                            }
                             
-                            Text("Favorite")
-                                .foregroundColor(self.selectionIndex==2 ? .black : .init(white: 0.8))
+                            
                         }
                     }
                     Spacer()
@@ -79,12 +88,15 @@ struct TabNavView: View {
                         self.selectionIndex = 3
                     }) {
                         VStack {
-                            Image(systemName: "ellipsis")
+                            Image(systemName: "magnifyingglass")
                                 .font(.system(size: gr.size.width*0.06, weight: .bold))
                                 .foregroundColor(self.selectionIndex==3 ? .black : .init(white: 0.8))
                             
-                            Text("More")
-                                .foregroundColor(self.selectionIndex==3 ? .black : .init(white: 0.8))
+                            if self.selectionIndex == 3 {
+                                Circle().frame(width: gr.size.width*0.016, height: gr.size.width*0.04)
+                                    .foregroundColor(.black)
+                            }
+                            
                         }
                     }
                     
