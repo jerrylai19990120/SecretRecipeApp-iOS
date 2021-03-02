@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		923A9D2E25EDA7C2009D1D00 /* SecretRecipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SecretRecipe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		923A9D2E25EDA7C2009D1D00 /* Secret Recipe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Secret Recipe.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		923A9D3125EDA7C2009D1D00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		923A9D3325EDA7C2009D1D00 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		923A9D3525EDA7C2009D1D00 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -48,7 +48,6 @@
 				FFEA0EBC6469E7C4BC9BFFBA /* Pods-SecretRecipe.debug.xcconfig */,
 				E2B3953498FDF85904C0AEF1 /* Pods-SecretRecipe.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -65,7 +64,7 @@
 		923A9D2F25EDA7C2009D1D00 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				923A9D2E25EDA7C2009D1D00 /* SecretRecipe.app */,
+				923A9D2E25EDA7C2009D1D00 /* Secret Recipe.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,7 +118,7 @@
 			);
 			name = SecretRecipe;
 			productName = SecretRecipe;
-			productReference = 923A9D2E25EDA7C2009D1D00 /* SecretRecipe.app */;
+			productReference = 923A9D2E25EDA7C2009D1D00 /* Secret Recipe.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -364,9 +363,9 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jerry-lai.SecretRecipe";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Secret Recipe";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -385,9 +384,9 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "jerry-lai.SecretRecipe";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Secret Recipe";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
