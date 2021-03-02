@@ -9,13 +9,33 @@
 import SwiftUI
 
 struct RecipeView: View {
+    
+    @State var query = ""
+    
+    var gr: GeometryProxy
+    
     var body: some View {
-        Text("Recipes!")
+        VStack {
+            HStack {
+                Text("What to eat?")
+            }
+            
+            HStack {
+                Image(systemName: "magnifyingglass")
+                .font(.system(size: gr.size.width*0.06, weight: .bold))
+                    .foregroundColor(.green)
+                
+                TextField("Search", text: $query)
+            }
+        }
     }
 }
 
 struct RecipeView_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeView()
+        GeometryReader { gr in
+            RecipeView(gr: gr)
+        }
+        
     }
 }

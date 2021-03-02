@@ -23,13 +23,13 @@ struct TabNavView: View {
                     }
                     
                     if self.selectionIndex == 1 {
-                        RecipeView()
+                        RecipeView(gr: gr)
                     }
                     if self.selectionIndex == 2 {
                         FavoriteView()
                     }
                     if self.selectionIndex == 3 {
-                        MoreView()
+                        SearchView(gr: gr)
                     }
                 }
                 Spacer()
@@ -101,7 +101,8 @@ struct TabNavView: View {
                     }
                     
                     
-                }
+                }.padding()
+                .frame(width: gr.size.width, height: gr.size.height*0.1)
             }.padding()
 
         }
