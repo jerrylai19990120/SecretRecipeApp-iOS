@@ -19,14 +19,17 @@ struct TabNavView: View {
                 ZStack {
                     
                     if self.selectionIndex == 0 {
-                        HomeView()
+                        //HomeView(gr: gr)
+                        RecipeView(gr: gr)
+                        //SearchView(gr: gr)
                     }
                     
                     if self.selectionIndex == 1 {
                         RecipeView(gr: gr)
                     }
                     if self.selectionIndex == 2 {
-                        FavoriteView()
+                        //FavoriteView(gr: gr)
+                        SearchView(gr: gr)
                     }
                     if self.selectionIndex == 3 {
                         SearchView(gr: gr)

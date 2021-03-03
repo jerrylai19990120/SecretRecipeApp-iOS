@@ -31,6 +31,7 @@ struct CategoryItem: View {
         .frame(width: gr.size.width*0.4, height: gr.size.width*0.35)
             .background(color)
         .cornerRadius(20)
+        .shadow(radius: 3)
     }
 }
 

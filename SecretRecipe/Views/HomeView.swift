@@ -9,13 +9,26 @@
 import SwiftUI
 
 struct HomeView: View {
+    
+    var gr: GeometryProxy
+    
     var body: some View {
-        Text("Home!")
+        VStack {
+            HStack {
+                Spacer()
+                Text("Home")
+                    .font(.custom("Chalkboard SE", size: gr.size.width*0.05))
+                    
+                Spacer()
+            }
+        }
     }
 }
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        GeometryReader { gr in
+            HomeView(gr: gr)
+        }
     }
 }

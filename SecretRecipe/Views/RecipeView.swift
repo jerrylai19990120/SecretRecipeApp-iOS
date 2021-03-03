@@ -17,16 +17,31 @@ struct RecipeView: View {
     var body: some View {
         VStack {
             HStack {
-                Text("What to eat?")
+                Spacer()
+                Text("Feature Recipes")
+                    .font(.custom("Chalkboard SE", size: gr.size.width*0.05))
+                Spacer()
             }
             
-            HStack {
-                Image(systemName: "magnifyingglass")
-                .font(.system(size: gr.size.width*0.06, weight: .bold))
-                    .foregroundColor(.green)
-                
-                TextField("Search", text: $query)
-            }
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    BannerCategory(gr: gr).padding()
+                    BannerCategory(gr: gr).padding([.trailing, .top, .bottom])
+                    BannerCategory(gr: gr).padding([.trailing, .top, .bottom])
+                }
+            }.padding()
+            Divider().padding(.bottom, gr.size.width*0.026)
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack {
+                    RecipeItem(gr: gr)
+                    RecipeItem(gr: gr)
+                    RecipeItem(gr: gr)
+                    RecipeItem(gr: gr)
+                    RecipeItem(gr: gr)
+                    RecipeItem(gr: gr)
+                }.frame(width: gr.size.width)
+            }.frame(width: gr.size.width)
+           
         }
     }
 }
