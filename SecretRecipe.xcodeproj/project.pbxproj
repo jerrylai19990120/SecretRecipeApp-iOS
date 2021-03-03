@@ -23,6 +23,7 @@
 		92A1A94E25EF065200FB64BB /* BannerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A1A94D25EF065200FB64BB /* BannerCategory.swift */; };
 		92A1A95025EFFE7D00FB64BB /* LargeBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A1A94F25EFFE7D00FB64BB /* LargeBanner.swift */; };
 		92A1A95225F00CE600FB64BB /* DailyHotRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A1A95125F00CE600FB64BB /* DailyHotRecipe.swift */; };
+		92A1A95425F0169200FB64BB /* FavoriteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A1A95325F0169200FB64BB /* FavoriteItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		92A1A94D25EF065200FB64BB /* BannerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCategory.swift; sourceTree = "<group>"; };
 		92A1A94F25EFFE7D00FB64BB /* LargeBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeBanner.swift; sourceTree = "<group>"; };
 		92A1A95125F00CE600FB64BB /* DailyHotRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHotRecipe.swift; sourceTree = "<group>"; };
+		92A1A95325F0169200FB64BB /* FavoriteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteItem.swift; sourceTree = "<group>"; };
 		E2B3953498FDF85904C0AEF1 /* Pods-SecretRecipe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecretRecipe.release.xcconfig"; path = "Target Support Files/Pods-SecretRecipe/Pods-SecretRecipe.release.xcconfig"; sourceTree = "<group>"; };
 		FD7A4AC611C878D6D023A2F2 /* Pods_SecretRecipe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SecretRecipe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFEA0EBC6469E7C4BC9BFFBA /* Pods-SecretRecipe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecretRecipe.debug.xcconfig"; path = "Target Support Files/Pods-SecretRecipe/Pods-SecretRecipe.debug.xcconfig"; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				92A1A94D25EF065200FB64BB /* BannerCategory.swift */,
 				92A1A94F25EFFE7D00FB64BB /* LargeBanner.swift */,
 				92A1A95125F00CE600FB64BB /* DailyHotRecipe.swift */,
+				92A1A95325F0169200FB64BB /* FavoriteItem.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -265,6 +268,7 @@
 				923A9D3425EDA7C2009D1D00 /* SceneDelegate.swift in Sources */,
 				923A9D3625EDA7C2009D1D00 /* TabNavView.swift in Sources */,
 				925B4E1625EED2BB00ECE13E /* FavoriteView.swift in Sources */,
+				92A1A95425F0169200FB64BB /* FavoriteItem.swift in Sources */,
 				92A1A95025EFFE7D00FB64BB /* LargeBanner.swift in Sources */,
 				92A1A95225F00CE600FB64BB /* DailyHotRecipe.swift in Sources */,
 				925B4E1325EED2A100ECE13E /* RecipeView.swift in Sources */,

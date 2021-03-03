@@ -19,7 +19,8 @@ struct TabNavView: View {
                 ZStack {
                     
                     if self.selectionIndex == 0 {
-                        HomeView(gr: gr)
+                        //HomeView(gr: gr)
+                        FavoriteView(gr: gr)
                     }
                     
                     if self.selectionIndex == 1 {
