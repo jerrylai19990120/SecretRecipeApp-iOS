@@ -38,7 +38,7 @@ struct HomeView: View {
                         .offset(y: -gr.size.height*0.028)
                     Spacer()
                 }.padding()
-                    .offset(y: gr.size.height*0.08)
+                .offset(y: gr.size.height*0.08)
                 
                 Text("What's New?")
                     .foregroundColor(.white)
@@ -46,9 +46,11 @@ struct HomeView: View {
                     .offset(y: gr.size.height*0.07)
                     
             }
+            
             ScrollView(.vertical, showsIndicators: false) {
                 VStack{
                     SubHeader(gr: gr, color: color, title: "Trends", subtitle: "View All")
+                    
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
                             LargeBanner(gr: gr).padding(.bottom,gr.size.height*0.11)
@@ -60,10 +62,19 @@ struct HomeView: View {
                         }.padding(.leading)
                     }
                     SubHeader(gr: gr, color: color, title: "Hot Recipes", subtitle: "More")
+                    
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack(alignment: .leading, spacing: gr.size.height*0.04) {
+                            DailyHotRecipe(gr: gr)
+                            DailyHotRecipe(gr: gr)
+                            DailyHotRecipe(gr: gr)
+                        }
+                    }
                 }.padding()
             }
             
         }.offset(y: -gr.size.height*0.18)
+        .frame(height: gr.size.height+gr.size.height*0.18)
     }
 }
 
