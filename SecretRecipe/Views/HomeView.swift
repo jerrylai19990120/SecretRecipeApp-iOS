@@ -73,8 +73,8 @@ struct HomeView: View {
                 }.padding()
             }
             
-        }.offset(y: -gr.size.height*0.18)
-        .frame(height: gr.size.height+gr.size.height*0.18)
+        }.offset(y: -gr.size.height*0.12)
+        .frame(height: gr.size.height+gr.size.height*0.12)
     }
 }
 
