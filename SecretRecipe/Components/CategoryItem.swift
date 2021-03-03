@@ -24,9 +24,9 @@ struct CategoryItem: View {
                 .renderingMode(.original)
                 .frame(width: gr.size.width*0.20, height: gr.size.width*0.20)
             Text(category)
-                .font(.custom("Chalkboard SE", size: gr.size.width*0.05))
+                .font(.custom("KohinoorTelugu-Light", size: gr.size.width*0.048))
                 .fontWeight(.thin)
-            
+            .foregroundColor(Color(red: 83/255, green: 82/255, blue: 108/255))
         }.padding()
         .frame(width: gr.size.width*0.4, height: gr.size.width*0.35)
             .background(color)

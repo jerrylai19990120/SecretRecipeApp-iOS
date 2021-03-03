@@ -12,7 +12,7 @@ struct BannerCategory: View {
     
     var gr: GeometryProxy
     
-    var color: Color = Color(red: 248/255, green: 164/255, blue: 147/255)
+    var color = Color(red: 248/255, green: 164/255, blue: 147/255)
     
     var img = "1"
     
@@ -22,7 +22,7 @@ struct BannerCategory: View {
         HStack {
             VStack {
                 Text(category)
-                    .font(.custom("Chalkboard SE", size: gr.size.width*0.05))
+                    .font(.custom("KohinoorTelugu-Light", size: gr.size.width*0.05))
                     .fontWeight(.thin)
                     .foregroundColor(Color(red: 64/255, green: 63/255, blue: 83/255))
                 Spacer()
