@@ -15,7 +15,7 @@ struct HomeView: View {
     var color = Color(red: 255/255, green: 195/255, blue: 60/255)
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             ZStack {
                 RoundedRectangle(cornerRadius: 36)
                     .fill(color)
@@ -46,10 +46,23 @@ struct HomeView: View {
                     .offset(y: gr.size.height*0.07)
                     
             }
-            VStack{
-                SubHeader(gr: gr, color: color, title: "Trends", subtitle: "View All")
-                SubHeader(gr: gr, color: color, title: "Hot Recipes", subtitle: "More")
-            }.padding()
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack{
+                    SubHeader(gr: gr, color: color, title: "Trends", subtitle: "View All")
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack {
+                            LargeBanner(gr: gr).padding(.bottom,gr.size.height*0.11)
+                                .padding(.trailing)
+                            LargeBanner(gr: gr).padding(.bottom,gr.size.height*0.11)
+                                .padding(.trailing)
+                            LargeBanner(gr: gr).padding(.bottom,gr.size.height*0.11)
+                                .padding(.trailing)
+                        }.padding(.leading)
+                    }
+                    SubHeader(gr: gr, color: color, title: "Hot Recipes", subtitle: "More")
+                }.padding()
+            }
+            
         }.offset(y: -gr.size.height*0.18)
     }
 }
