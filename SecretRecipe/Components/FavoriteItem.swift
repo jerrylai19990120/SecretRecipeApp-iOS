@@ -12,6 +12,8 @@ struct FavoriteItem: View {
     
     var gr: GeometryProxy
     
+    var img = "sample1"
+    
     var rating = "4.6"
     
     var cookTime = "26 mins"
@@ -20,7 +22,7 @@ struct FavoriteItem: View {
     
     var body: some View {
         VStack(spacing: 16) {
-            Image("sample1")
+            Image(img)
                 .resizable()
                 .renderingMode(.original)
                 .aspectRatio(contentMode: .fill)

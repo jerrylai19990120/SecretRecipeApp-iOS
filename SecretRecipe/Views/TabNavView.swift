@@ -19,8 +19,7 @@ struct TabNavView: View {
                 ZStack {
                     
                     if self.selectionIndex == 0 {
-                        //HomeView(gr: gr)
-                        FavoriteView(gr: gr)
+                        HomeView(gr: gr)
                     }
                     
                     if self.selectionIndex == 1 {
@@ -129,5 +128,6 @@ struct CustomTabBar: View {
         }.padding()
         .frame(width: gr.size.width, height: gr.size.height*0.1)
             .background(Color.white)
+            
     }
 }

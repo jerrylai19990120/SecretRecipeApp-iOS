@@ -23,7 +23,7 @@ struct RecipeView: View {
                     .foregroundColor(Color(red: 64/255, green: 63/255, blue: 83/255))
                 Spacer()
             }
-            Divider()
+            //Divider()
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
                     BannerCategory(gr: gr, color: Color(red: 253/255, green: 228/255, blue: 151/255), img: "2", category: "Quickly: some quick recipes").padding()
@@ -33,18 +33,19 @@ struct RecipeView: View {
                     BannerCategory(gr: gr, color: Color(red: 122/255, green: 210/255, blue: 186/255), img: "5", category: "Lunch: Hungry yet?").padding([.trailing, .top, .bottom])
                     BannerCategory(gr: gr, color: Color(red: 245/255, green: 207/255, blue: 145/255), img: "6", category: "Dinner: Much more options").padding([.trailing, .top, .bottom])
                 }
-            }.padding()
+            }.padding([.top, .bottom])
             Divider().padding(.bottom, gr.size.width*0.026)
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    RecipeItem(gr: gr)
-                    RecipeItem(gr: gr)
-                    RecipeItem(gr: gr)
-                    RecipeItem(gr: gr)
-                    RecipeItem(gr: gr)
-                    RecipeItem(gr: gr)
+                    RecipeItem(gr: gr, img: "1")
+                    RecipeItem(gr: gr, img: "2")
+                    RecipeItem(gr: gr, img: "3")
+                    RecipeItem(gr: gr, img: "4")
+                    RecipeItem(gr: gr, img: "5")
+                    RecipeItem(gr: gr, img: "6")
                 }.frame(width: gr.size.width)
-            }.frame(width: gr.size.width)
+            }.padding(.bottom, 1)
+            .frame(width: gr.size.width)
            
         }
     }

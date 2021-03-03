@@ -30,7 +30,7 @@ struct FavoriteView: View {
                     Spacer()
                     Spacer()
                     Spacer()
-                    Image("pizzaBg")
+                    Image("pancakeBg")
                         .resizable()
                         .renderingMode(.original)
                         .aspectRatio(contentMode: .fit)
@@ -48,9 +48,10 @@ struct FavoriteView: View {
             
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    FavoriteItem(gr: gr)
-                    FavoriteItem(gr: gr)
-                    FavoriteItem(gr: gr)
+                    FavoriteItem(gr: gr, img: "sample1")
+                    FavoriteItem(gr: gr, img: "sample2")
+                    FavoriteItem(gr: gr, img: "sample3")
+                    FavoriteItem(gr: gr, img: "sample4")
                 }.padding(.top)
             }
 
