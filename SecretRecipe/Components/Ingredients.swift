@@ -46,7 +46,8 @@ struct Ingredients: View {
                 
             }.padding()
             
-        }.frame(width: gr.size.width)
+        }.padding(.bottom, gr.size.height*0.4)
+        .frame(width: gr.size.width)
         .background(Color(red: 243/255, green: 245/255, blue: 249/255))
         
     }

@@ -15,7 +15,7 @@ struct TabNavView: View {
     var body: some View {
         GeometryReader {
             gr in
-            
+            NavigationView {
                 ZStack {
                     
                     if self.selectionIndex == 0 {
@@ -37,7 +37,10 @@ struct TabNavView: View {
                     }.frame(height: gr.size.height)
                     
                     
-                }
+                }.navigationBarTitle("")
+                .navigationBarHidden(true)
+            }
+                
                 
 
         }
@@ -58,6 +61,7 @@ struct CustomTabBar: View {
     @Binding var selectionIndex: Int
     
     var body: some View {
+        
         HStack {
             
             Button(action: {

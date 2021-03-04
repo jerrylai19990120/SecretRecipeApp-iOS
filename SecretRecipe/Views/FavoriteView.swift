@@ -14,6 +14,8 @@ struct FavoriteView: View {
     
     var color = Color(red: 255/255, green: 195/255, blue: 60/255)
     
+    @State var popup = false
+    
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
@@ -47,8 +49,17 @@ struct FavoriteView: View {
             }
             
             ScrollView(.vertical, showsIndicators: false) {
-                VStack {
-                    FavoriteItem(gr: gr, img: "sample1")
+                VStack(alignment: .center, spacing: gr.size.height*0.03) {
+                    
+                    
+                    NavigationLink(destination: RecipeDetailView(gr: gr, popup: $popup).navigationBarTitle("").navigationBarHidden(true), isActive: $popup) {
+                        Button(action: {
+                            self.popup.toggle()
+                        }) {
+                            FavoriteItem(gr: gr, img: "sample1")
+                        }
+                    }.accentColor(.black)
+                    
                     FavoriteItem(gr: gr, img: "sample2")
                     FavoriteItem(gr: gr, img: "sample3")
                     FavoriteItem(gr: gr, img: "sample4")

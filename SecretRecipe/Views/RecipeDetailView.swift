@@ -14,22 +14,51 @@ struct RecipeDetailView: View {
     
     @State var selection = -1
     
-    @State var popup = false
+    @Binding var popup: Bool
+    
+    @State var isFavorite = false
     
     var body: some View {
         ZStack {
             //Color(red: 243/255, green: 245/255, blue: 249/255)
             VStack {
                 
-                Image("sample1")
-                    .resizable()
-                    .renderingMode(.original)
-                    .aspectRatio(contentMode: .fill)
-                    .clipped()
-                    .frame(width: gr.size.width, height: gr.size.height*0.5)
-                    .onTapGesture {
-                        self.popup.toggle()
-                }
+                ZStack {
+                    Image("sample1")
+                        .resizable()
+                        .renderingMode(.original)
+                        .aspectRatio(contentMode: .fill)
+                        .clipped()
+                        .frame(width: gr.size.width, height: gr.size.height*0.5)
+                    
+                    
+                    VStack {
+                        HStack {
+                            Image(systemName: "chevron.left")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .foregroundColor(.white)
+                                .frame(width: gr.size.width*0.07, height: gr.size.width*0.07)
+                                .onTapGesture {
+                                    self.popup.toggle()
+                            }
+                            Spacer()
+                            Image(systemName: isFavorite ? "heart.fill" : "heart")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .foregroundColor(.white)
+                                .frame(width: gr.size.width*0.07, height: gr.size.width*0.07)
+                                .onTapGesture {
+                                    self.isFavorite.toggle()
+                            }
+                        }.padding(.top, gr.size.height*0.1)
+                        
+                        Spacer()
+                    }.padding()
+                    
+                    
+                }.edgesIgnoringSafeArea(.top)
+                
                 
                 ZStack {
                     RoundedRectangle(cornerRadius: 30)
@@ -47,7 +76,8 @@ struct RecipeDetailView: View {
 
             }
             
-        }.edgesIgnoringSafeArea(.top)
+        }.padding(.top, gr.size.height*0.46)
+        .edgesIgnoringSafeArea(.top)
         
     }
 }
@@ -55,7 +85,7 @@ struct RecipeDetailView: View {
 struct RecipeDetailView_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { gr in
-            RecipeDetailView(gr: gr)
+            RecipeDetailView(gr: gr, popup: .constant(true))
         }
         
     }
