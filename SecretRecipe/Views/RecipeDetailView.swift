@@ -18,6 +18,8 @@ struct RecipeDetailView: View {
     
     @State var isFavorite = false
     
+    @State var tag: Int?
+    
     var body: some View {
         ZStack {
             //Color(red: 243/255, green: 245/255, blue: 249/255)
@@ -34,14 +36,22 @@ struct RecipeDetailView: View {
                     
                     VStack {
                         HStack {
-                            Image(systemName: "chevron.left")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .foregroundColor(.white)
-                                .frame(width: gr.size.width*0.07, height: gr.size.width*0.07)
-                                .onTapGesture {
+                            NavigationLink(destination: FavoriteView(gr: gr).navigationBarTitle("").navigationBarHidden(true), tag: 1, selection: $tag) {
+                                
+                                Button(action: {
+                                    self.tag = 1
                                     self.popup.toggle()
-                            }
+                                }) {
+                                    Image(systemName: "chevron.left")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .foregroundColor(.white)
+                                        .frame(width: gr.size.width*0.07, height: gr.size.width*0.07)
+                                }
+                                
+                            }.accentColor(.black)
+                            
+                                
                             Spacer()
                             Image(systemName: isFavorite ? "heart.fill" : "heart")
                                 .resizable()

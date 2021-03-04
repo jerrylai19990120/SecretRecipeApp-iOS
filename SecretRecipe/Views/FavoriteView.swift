@@ -16,12 +16,14 @@ struct FavoriteView: View {
     
     @State var popup = false
     
+    @State var tag: Int?
+    
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
                 RoundedRectangle(cornerRadius: 36)
                     .fill(color)
-                    .frame(width: gr.size.width, height: gr.size.height*0.3)
+                    .frame(width: gr.size.width, height: gr.size.height*0.36)
                 HStack {
                     Image("forkBg")
                         .resizable()
@@ -51,18 +53,24 @@ struct FavoriteView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .center, spacing: gr.size.height*0.03) {
                     
-                    
-                    NavigationLink(destination: RecipeDetailView(gr: gr, popup: $popup).navigationBarTitle("").navigationBarHidden(true), isActive: $popup) {
+                    NavigationLink(destination: RecipeDetailView(gr: gr, popup: $popup).navigationBarTitle("").navigationBarHidden(true), tag: 0, selection: $tag) {
                         Button(action: {
+                            self.tag = 0
                             self.popup.toggle()
                         }) {
                             FavoriteItem(gr: gr, img: "sample1")
                         }
                     }.accentColor(.black)
                     
-                    FavoriteItem(gr: gr, img: "sample2")
-                    FavoriteItem(gr: gr, img: "sample3")
-                    FavoriteItem(gr: gr, img: "sample4")
+                    NavigationLink(destination: RecipeDetailView(gr: gr, popup: $popup).navigationBarTitle("").navigationBarHidden(true), tag: 1, selection: $tag) {
+                        Button(action: {
+                            self.tag = 1
+                            self.popup.toggle()
+                        }) {
+                            FavoriteItem(gr: gr, img: "sample1")
+                        }
+                    }.accentColor(.black)
+                    
                 }.padding(.top)
             }
 
