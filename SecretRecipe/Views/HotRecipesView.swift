@@ -21,6 +21,15 @@ struct HotRecipesView: View {
                     .fill(color)
                     .frame(width: gr.size.width, height: gr.size.height*0.3)
                 HStack {
+                    NavigationLink(destination: TabNavView(selectionIndex: 0).navigationBarTitle("").navigationBarHidden(true)) {
+                        Image(systemName: "chevron.left")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundColor(.white)
+                            .frame(width: gr.size.width*0.07, height: gr.size.width*0.07)
+                    }
+                    
+                    
                     Image("forkBg")
                         .resizable()
                         .renderingMode(.original)

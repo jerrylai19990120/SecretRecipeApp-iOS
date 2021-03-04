@@ -21,6 +21,14 @@ struct TrendsView: View {
                     .fill(color)
                     .frame(width: gr.size.width, height: gr.size.height*0.3)
                 HStack {
+                    NavigationLink(destination: TabNavView(selectionIndex: 0).navigationBarTitle("").navigationBarHidden(true)) {
+                        Image(systemName: "chevron.left")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .foregroundColor(.white)
+                            .frame(width: gr.size.width*0.07, height: gr.size.width*0.07)
+                    }
+                    
                     Image("forkBg")
                         .resizable()
                         .renderingMode(.original)
@@ -35,7 +43,7 @@ struct TrendsView: View {
                         .renderingMode(.original)
                         .aspectRatio(contentMode: .fit)
                         .frame(width: gr.size.width*0.16, height: gr.size.width*0.16)
-                        .offset(y: gr.size.height*0.001)
+                        .offset(y: gr.size.height*0.01)
                     Spacer()
                 }.padding()
                 .offset(y: gr.size.height*0.1)
@@ -54,7 +62,7 @@ struct TrendsView: View {
             }
             
         }.offset(y: -gr.size.height*0.12)
-        .frame(height: gr.size.height+gr.size.height*0.18)
+        .frame(height: gr.size.height+gr.size.height*0.12)
     }
 }
 
