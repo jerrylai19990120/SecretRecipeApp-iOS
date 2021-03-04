@@ -61,12 +61,12 @@ struct FavoriteItem: View {
                     }
                 }.padding([.leading, .trailing])
                 .frame(width: gr.size.width*0.92)
+                
             }.padding([.leading, .trailing])
             .frame(width: gr.size.width*0.92)
             
-            
-            
         }
+        
     }
 }
 

@@ -102,15 +102,26 @@ struct SubHeader: View {
                 .font(.system(size: gr.size.width*0.072, weight: .semibold, design: .default))
             Spacer()
             HStack(spacing: 2) {
-                Text(subtitle)
-                    .foregroundColor(color)
-                    .fontWeight(.medium)
-                Image(systemName: "chevron.right")
-                    .resizable()
-                    .foregroundColor(color)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: gr.size.width*0.036, height: gr.size.width*0.036)
+                NavigationLink(destination: compare(title: title, gr: gr)) {
+                    Text(subtitle)
+                        .foregroundColor(color)
+                        .fontWeight(.medium)
+                    Image(systemName: "chevron.right")
+                        .resizable()
+                        .foregroundColor(color)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: gr.size.width*0.036, height: gr.size.width*0.036)
+                }
+                
             }
         }.padding([.leading, .trailing])
+    }
+    
+    func compare(title: String, gr: GeometryProxy) -> some View {
+        if title == "Trends"{
+            return AnyView(TrendsView(gr: gr).navigationBarTitle("").navigationBarHidden(true))
+        } else {
+            return AnyView(HotRecipesView(gr: gr).navigationBarTitle("").navigationBarHidden(true))
+        }
     }
 }

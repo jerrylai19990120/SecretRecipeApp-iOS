@@ -36,7 +36,7 @@ struct RecipeDetailView: View {
                     
                     VStack {
                         HStack {
-                            NavigationLink(destination: FavoriteView(gr: gr).navigationBarTitle("").navigationBarHidden(true), tag: 1, selection: $tag) {
+                            NavigationLink(destination: TabNavView(selectionIndex: 2).navigationBarTitle("").navigationBarHidden(true), tag: 1, selection: $tag) {
                                 
                                 Button(action: {
                                     self.tag = 1
