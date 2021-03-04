@@ -14,24 +14,41 @@ struct RecipeDetailView: View {
     
     @State var selection = -1
     
+    @State var popup = false
+    
     var body: some View {
-        VStack {
-            Image("sample1")
-                .resizable()
-                .renderingMode(.original)
-                .aspectRatio(contentMode: .fill)
-                .clipped()
-                .frame(width: gr.size.width, height: gr.size.height*0.5)
-            
-            ZStack {
-                RoundedRectangle(cornerRadius: 30)
-                    .fill(Color.white)
-                DetailComponent(gr: gr)
+        ZStack {
+            //Color(red: 243/255, green: 245/255, blue: 249/255)
+            VStack {
                 
-            }.offset(y: -60)
-            
+                Image("sample1")
+                    .resizable()
+                    .renderingMode(.original)
+                    .aspectRatio(contentMode: .fill)
+                    .clipped()
+                    .frame(width: gr.size.width, height: gr.size.height*0.5)
+                    .onTapGesture {
+                        self.popup.toggle()
+                }
+                
+                ZStack {
+                    RoundedRectangle(cornerRadius: 30)
+                        .fill(Color(red: 248/255, green: 251/255, blue: 254/255))
+                        .frame(height: gr.size.height*0.6)
+                        .offset(y: !popup ? gr.size.height+88 : -gr.size.height*0.4)
+                        
+                    
+                    DetailComponent(gr: gr).padding(.top, 40)
+                        .offset(y: !popup ? gr.size.height+88 : -gr.size.height*0.18)
+                        
+                }.animation(.default)
+                
+                
+
+            }
             
         }.edgesIgnoringSafeArea(.top)
+        
     }
 }
 

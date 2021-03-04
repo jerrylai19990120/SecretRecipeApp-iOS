@@ -44,7 +44,7 @@ struct CustomTopTabBar: View {
                 Button(action: {
                     self.selection = 1
                 }) {
-                    Text("Preparations")
+                    Text("Instructions")
                         .foregroundColor(selection == 1 ? activeColor : inactiveColor)
                 }
                 

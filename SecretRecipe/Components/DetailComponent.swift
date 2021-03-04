@@ -25,13 +25,14 @@ struct DetailComponent: View {
             
             Text("California Pasta")
                 .font(.system(size: gr.size.width*0.06, weight: .medium, design: .rounded))
-                .padding(.leading)
+                .padding(.leading, gr.size.width*0.08)
                 
             Text("Easy, quick and yet so delicious!")
                 .font(.system(size: gr.size.width*0.05, weight: .medium, design: .rounded))
                 .foregroundColor(.gray)
                 .padding(.top, 8)
-                .padding(.leading)
+                .padding(.leading, gr.size.width*0.08)
+            
             
             HStack(spacing: gr.size.width*0.08) {
                 HStack {
@@ -50,25 +51,30 @@ struct DetailComponent: View {
                         .foregroundColor(.orange)
                     Text(difficulty)
                 }
-            }.padding([.bottom, .leading, .trailing])
+            }.padding([.bottom, .trailing])
+            .padding(.leading, gr.size.width*0.08)
             
-            CustomTopTabBar(gr: gr, selection: $selection)
-            
-            if selection == -1 {
-                Introduction(gr: gr)
+            VStack(spacing: 0) {
+                CustomTopTabBar(gr: gr, selection: $selection)
                 
+                if selection == -1 {
+                    Introduction(gr: gr)
+                    
+                }
+                
+                if selection == 0 {
+                    Ingredients(gr: gr)
+                }
+                
+                if selection == 1 {
+                    Instrutions(gr: gr)
+                }
+
             }
             
-            if selection == 0 {
-                Ingredients(gr: gr)
-            }
             
-            if selection == 1 {
-                Preparations(gr: gr)
-            }
-            
-            
-        }.frame(width: gr.size.width)
+        }.frame(width: gr.size.width, height: gr.size.height)
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
