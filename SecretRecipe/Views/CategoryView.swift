@@ -36,14 +36,14 @@ struct CategoryView: View {
             
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    RecipeItem(gr: gr, img: "1")
-                    RecipeItem(gr: gr, img: "2")
-                    RecipeItem(gr: gr, img: "3")
-                    RecipeItem(gr: gr, img: "4")
-                    RecipeItem(gr: gr, img: "5")
-                    RecipeItem(gr: gr, img: "6")
+                    ForEach(DataService.instance.categoryRecipes, id: \.self) {
+                        item in
+                        RecipeItem(gr: self.gr, img: item.img, title: item.title, calories: "\(item.calories)")
+                    }
+                    
                 }
-            }.padding([.top, .bottom])
+            }.frame(width: gr.size.width)
+            .padding([.top, .bottom])
         }
     }
 }

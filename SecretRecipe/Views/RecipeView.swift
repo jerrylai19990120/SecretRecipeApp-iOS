@@ -37,12 +37,13 @@ struct RecipeView: View {
             Divider().padding(.bottom, gr.size.width*0.026)
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    RecipeItem(gr: gr, img: "1")
+                    Text("")
+                    /*RecipeItem(gr: gr, img: "1")
                     RecipeItem(gr: gr, img: "2")
                     RecipeItem(gr: gr, img: "3")
                     RecipeItem(gr: gr, img: "4")
                     RecipeItem(gr: gr, img: "5")
-                    RecipeItem(gr: gr, img: "6")
+                    RecipeItem(gr: gr, img: "6")*/
                 }.frame(width: gr.size.width)
             }.padding(.bottom, 1)
             .frame(width: gr.size.width)

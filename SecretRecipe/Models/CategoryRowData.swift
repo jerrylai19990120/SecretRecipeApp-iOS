@@ -17,5 +17,7 @@ struct CategoryRowData: Hashable {
     var color2: Color
     var img1: String
     var img2: String
+    var index1: Int
+    var index2: Int
     
 }
