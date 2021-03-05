@@ -12,5 +12,15 @@ class DataService {
     
     static let instance = DataService()
     
+    var recipes = [Recipe]()
+    
+    var trendingRecipes = [Recipe]()
+    
+    var hotRecipes = [Recipe]()
+    
+    private func getRecipesByCategory(category: String){
+        
+    }
+    
     
 }

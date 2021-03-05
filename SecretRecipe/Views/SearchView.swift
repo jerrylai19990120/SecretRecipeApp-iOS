@@ -38,22 +38,45 @@ struct SearchView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     HStack {
-                        CategoryItem(gr: gr, color: Color(red: 253/255, green: 228/255, blue: 151/255), img: "steak", category: "Quickly")
+                        NavigationLink(destination: CategoryView(gr: gr, category: "Quickly").navigationBarTitle("").navigationBarHidden(true)) {
+                            CategoryItem(gr: gr, color: Color(red: 253/255, green: 228/255, blue: 151/255), img: "steak", category: "Quickly")
+                        }
+                        
                         Spacer()
-                        CategoryItem(gr: gr, color: Color(red: 189/255, green: 232/255, blue: 254/255), img: "pasta", category: "Breakfast")
+                        
+                        NavigationLink(destination: CategoryView(gr: gr, category: "Breakfast").navigationBarTitle("").navigationBarHidden(true)) {
+                            CategoryItem(gr: gr, color: Color(red: 189/255, green: 232/255, blue: 254/255), img: "pasta", category: "Breakfast")
+                        }
+                        
+                        
                     }.padding([.top, .leading, .trailing])
                     
                     HStack {
-                        CategoryItem(gr: gr, color: Color(red: 248/255, green: 164/255, blue: 147/255), img: "desert", category: "Desert")
+                        
+                        NavigationLink(destination: CategoryView(gr: gr, category: "Desert").navigationBarTitle("").navigationBarHidden(true)) {
+                            CategoryItem(gr: gr, color: Color(red: 248/255, green: 164/255, blue: 147/255), img: "desert", category: "Desert")
+                        }
+                        
                         Spacer()
-                        CategoryItem(gr: gr, color: Color(red: 207/255, green: 172/255, blue: 220/255), img: "meat", category: "lunch")
+                        
+                        NavigationLink(destination: CategoryView(gr: gr, category: "Lunch").navigationBarTitle("").navigationBarHidden(true)) {
+                            CategoryItem(gr: gr, color: Color(red: 207/255, green: 172/255, blue: 220/255), img: "meat", category: "Lunch")
+                        }
+                        
                     }.padding([.leading, .trailing])
                     
                     
                     HStack {
-                        CategoryItem(gr: gr, color: Color(red: 122/255, green: 210/255, blue: 186/255), img: "pasta2", category: "Salad")
+                        NavigationLink(destination: CategoryView(gr: gr, category: "Salad").navigationBarTitle("").navigationBarHidden(true)) {
+                            CategoryItem(gr: gr, color: Color(red: 122/255, green: 210/255, blue: 186/255), img: "pasta2", category: "Salad")
+                        }
+                        
                         Spacer()
-                        CategoryItem(gr: gr, color: Color(red: 245/255, green: 207/255, blue: 145/255), img: "pasta2", category: "Dinner")
+                        
+                        NavigationLink(destination: CategoryView(gr: gr, category: "Dinner").navigationBarTitle("").navigationBarHidden(true)) {
+                            CategoryItem(gr: gr, color: Color(red: 245/255, green: 207/255, blue: 145/255), img: "pasta2", category: "Dinner")
+                        }
+                        
                     }.padding([.leading, .trailing])
                 }
             }

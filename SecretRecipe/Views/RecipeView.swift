@@ -22,7 +22,7 @@ struct RecipeView: View {
                     .font(.custom("Chalkboard SE", size: gr.size.width*0.05))
                     .foregroundColor(Color(red: 64/255, green: 63/255, blue: 83/255))
                 Spacer()
-            }
+            }.padding(.top)
             //Divider()
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
