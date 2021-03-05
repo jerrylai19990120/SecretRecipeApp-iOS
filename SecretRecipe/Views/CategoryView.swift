@@ -43,7 +43,7 @@ struct CategoryView: View {
                     RecipeItem(gr: gr, img: "5")
                     RecipeItem(gr: gr, img: "6")
                 }
-            }
+            }.padding([.top, .bottom])
         }
     }
 }
