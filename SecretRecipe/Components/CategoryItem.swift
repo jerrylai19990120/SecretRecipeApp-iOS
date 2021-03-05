@@ -22,9 +22,10 @@ struct CategoryItem: View {
         VStack {
             Image(img).resizable()
                 .renderingMode(.original)
+                .aspectRatio(contentMode: .fit)
                 .frame(width: gr.size.width*0.20, height: gr.size.width*0.20)
             Text(category)
-                .font(.custom("KohinoorTelugu-Light", size: gr.size.width*0.048))
+                .font(.custom("KohinoorTelugu-Light", size: gr.size.width*0.041))
                 .fontWeight(.thin)
             .foregroundColor(Color(red: 83/255, green: 82/255, blue: 108/255))
         }.padding()
