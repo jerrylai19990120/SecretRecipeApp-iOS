@@ -22,11 +22,25 @@ class DataService {
     
     var categoryRecipes = [Recipe]()
     
-    var mealType = [String]()
+    var mealType = ["Breakfast", "Lunch", "Dinner", "Snack", "Teatime"]
     
-    var cuisineType = [String]()
-    
-    var dishType = [String]()
+    var dishType = ["Alcohol-cocktail",
+    "Biscuits and cookies",
+    "Bread",
+    "Cereals",
+    "Condiments and sauces",
+    "Drinks",
+    "Desserts",
+    "Egg",
+    "Main course",
+    "Omelet",
+    "Pancake",
+    "Preps",
+    "Preserve",
+    "Salad",
+    "Sandwiches",
+    "Soup",
+    "Starter"]
     
     func getRecipesByCategory(_ category: String, completion: @escaping (_ status: Bool)->()){
         
