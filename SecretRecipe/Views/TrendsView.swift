@@ -72,7 +72,8 @@ struct TrendsView: View {
         .frame(height: gr.size.height+gr.size.height*0.12)
             .onAppear {
                 DataService.instance.getHotAndTrending(isTrending: true) { (success) in
-                    
+                    self.trends = []
+                    self.trends = DataService.instance.trendingRecipes
                 }
         }
     }
