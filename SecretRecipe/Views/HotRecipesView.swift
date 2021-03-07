@@ -14,6 +14,8 @@ struct HotRecipesView: View {
     
     var color = Color(red: 255/255, green: 195/255, blue: 60/255)
     
+    @State var hots: [Recipe] = [Recipe(title: "no info", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: ["no info"], ingredients: [""], isFavorite: false, servings: 0)]
+    
     var body: some View {
         VStack(spacing: 0){
             ZStack {
@@ -57,12 +59,23 @@ struct HotRecipesView: View {
             
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    FavoriteItem(gr: gr)
-                    FavoriteItem(gr: gr)
+                    if self.hots.count != 0 {
+                        ForEach(self.hots, id: \.self){
+                            item in
+                            FavoriteItem(gr: self.gr, title: item.title, desc: item.healthLabel[0], img: item.img, calories: item.calories, weight: item.totalWeight, servings: item.servings)
+                        }
+                    }
+                    
                 }.padding(.top)
             }
         }.offset(y: -gr.size.height*0.12)
         .frame(height: gr.size.height+gr.size.height*0.12)
+            .onAppear {
+                DataService.instance.getHotAndTrending(isTrending: false) { (success) in
+                    self.hots = []
+                    self.hots = DataService.instance.hotRecipes
+                }
+        }
     }
 }
 

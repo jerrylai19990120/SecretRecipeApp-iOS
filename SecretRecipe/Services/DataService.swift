@@ -174,7 +174,7 @@ class DataService {
         
         let randomChar = chars.randomElement()!
         
-        var urlString = "https://api.edamam.com/search?q=\(randomChar)&app_id=\(APP_ID)&app_key=\(API_KEY)"
+        var urlString = "https://api.edamam.com/search?q=\(randomChar)&app_id=\(APP_ID)&app_key=\(API_KEY)&to=50"
         
         AF.request(urlString).responseJSON { (res) in
             if res.error == nil {

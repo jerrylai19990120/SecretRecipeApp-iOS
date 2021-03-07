@@ -12,17 +12,23 @@ struct FavoriteItem: View {
     
     var gr: GeometryProxy
     
+    var title = "No info"
+    
+    var desc = "No info"
+    
     var img = "sample1"
     
-    var rating = "4.6"
+    var calories = 46
     
-    var cookTime = "26 mins"
+    var weight = 160
     
-    var difficulty = "easy"
+    var servings = 6
+    
+    @State var customImg: UIImage = UIImage(named: "logo")!
     
     var body: some View {
         VStack(spacing: 16) {
-            Image(img)
+            Image(uiImage: customImg)
                 .resizable()
                 .renderingMode(.original)
                 .aspectRatio(contentMode: .fill)
@@ -32,10 +38,10 @@ struct FavoriteItem: View {
             
             VStack(alignment: .leading) {
                 
-                Text("California Pasta")
+                Text(title)
                     .font(.system(size: gr.size.width*0.06, weight: .medium, design: .rounded))
                 
-                Text("Easy, quick and yet so delicious!")
+                Text(desc)
                     .font(.system(size: gr.size.width*0.05, weight: .medium, design: .rounded))
                     .foregroundColor(.gray)
                     .padding(.top, 8)
@@ -45,19 +51,19 @@ struct FavoriteItem: View {
                     HStack {
                         Image(systemName: "star.fill")
                             .foregroundColor(.yellow)
-                        Text(rating)
+                        Text("\(calories) kCal")
                     }
                     Spacer()
                     HStack {
                         Image(systemName: "clock")
                             .foregroundColor(.blue)
-                        Text(cookTime)
+                        Text("\(weight) g")
                     }
                     Spacer()
                     HStack {
                         Image(systemName: "lightbulb")
                             .foregroundColor(.orange)
-                        Text(difficulty)
+                        Text("\(servings) servings")
                     }
                 }.padding([.leading, .trailing])
                 .frame(width: gr.size.width*0.92)
@@ -65,8 +71,42 @@ struct FavoriteItem: View {
             }.padding([.leading, .trailing])
             .frame(width: gr.size.width*0.92)
             
+        }.onAppear {
+            self.loadImage(imgUrl: self.img) { (success) in
+                
+            }
         }
         
+    }
+    
+    func loadImage(imgUrl: String, completion: @escaping (_ status: Bool)->()) {
+        
+        let urlString = imgUrl.replacingOccurrences(of: " ", with: "%20")
+        
+        guard let url = URL(string: urlString) else {
+            completion(false)
+            return
+        }
+        
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, res, error) in
+            guard let data = data else {
+                completion(false)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                guard let img = UIImage(data: data) else {
+                    completion(false)
+                    return
+                }
+                self.customImg = img
+                completion(true)
+            }
+        }
+               
+        task.resume()
+
     }
 }
 

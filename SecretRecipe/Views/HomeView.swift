@@ -58,11 +58,20 @@ struct HomeView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
                             if self.trends.count != 0 {
-                                ForEach(self.trends, id: \.self){
-                                    item in
-                                    LargeBanner(gr: self.gr, img: item.img, title: item.title, description: item.healthLabel[0], calories: item.calories, weight: item.totalWeight, serving: item.servings).padding(.bottom,self.gr.size.height*0.11)
-                                        .padding(.trailing)
+                                if self.trends.count <= 10 {
+                                    ForEach(self.trends, id: \.self){
+                                        item in
+                                        LargeBanner(gr: self.gr, img: item.img, title: item.title, description: item.healthLabel[0], calories: item.calories, weight: item.totalWeight, serving: item.servings).padding(.bottom,self.gr.size.height*0.11)
+                                            .padding(.trailing)
+                                    }
+                                } else {
+                                    ForEach(0...9, id: \.self){
+                                        i in
+                                        LargeBanner(gr: self.gr, img: self.trends[i].img, title: self.trends[i].title, description: self.trends[i].healthLabel[0], calories: self.trends[i].calories, weight: self.trends[i].totalWeight, serving: self.trends[i].servings).padding(.bottom,self.gr.size.height*0.11)
+                                            .padding(.trailing)
+                                    }
                                 }
+                                
                             }
                         
                             
@@ -73,10 +82,18 @@ struct HomeView: View {
                     
                     VStack(alignment: .leading, spacing: gr.size.height*0.04) {
                         if self.hots.count != 0 {
-                            ForEach(self.hots, id: \.self){
-                                item in
-                                DailyHotRecipe(gr: self.gr, title: item.title, desc: item.healthLabel.joined(separator: ", "), img: item.img)
+                            if self.hots.count <= 10 {
+                                ForEach(self.hots, id: \.self){
+                                    item in
+                                    DailyHotRecipe(gr: self.gr, title: item.title, desc: item.healthLabel.joined(separator: ", "), img: item.img)
+                                }
+                            } else {
+                                ForEach(0...9, id: \.self){
+                                    i in
+                                    DailyHotRecipe(gr: self.gr, title: self.hots[i].title, desc: self.hots[i].healthLabel.joined(separator: ", "), img: self.hots[i].img)
+                                }
                             }
+                            
                         }
                             
                     }.padding(.bottom, gr.size.height*0.05)

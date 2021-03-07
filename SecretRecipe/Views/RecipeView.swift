@@ -47,15 +47,23 @@ struct RecipeView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     if self.trends.count != 0 {
-                        ForEach(self.trends, id: \.self){
-                            item in
-                            RecipeItem(gr: self.gr, img: item.img, title: item.title, calories: "\(item.calories)")
+                        if self.trends.count <= 10 {
+                            ForEach(self.trends, id: \.self){
+                                item in
+                                RecipeItem(gr: self.gr, img: item.img, title: item.title, calories: "\(item.calories)")
+                            }
+                        } else {
+                            ForEach(0...9, id: \.self){
+                                i in
+                                RecipeItem(gr: self.gr, img: self.trends[i].img, title: self.trends[i].title, calories: "\(self.trends[i].calories)")
+                            }
                         }
+                        
                     }
                     
                 }.frame(width: gr.size.width)
-            }
-            .padding([.top, .bottom])
+            }.padding(.bottom, gr.size.height*0.1)
+            .padding(.top)
             .frame(width: gr.size.width)
            
         }.onAppear {
