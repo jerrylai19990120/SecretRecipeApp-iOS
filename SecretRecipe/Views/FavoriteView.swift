@@ -18,6 +18,8 @@ struct FavoriteView: View {
     
     @State var tag: Int?
     
+    @State var favorites = [Recipe]()
+    
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
@@ -53,24 +55,39 @@ struct FavoriteView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack(alignment: .center, spacing: gr.size.height*0.03) {
                     
-                    NavigationLink(destination: RecipeDetailView(gr: gr, popup: $popup).navigationBarTitle("").navigationBarHidden(true), tag: 0, selection: $tag) {
-                        Button(action: {
-                            self.tag = 0
-                            self.popup.toggle()
-                        }) {
-                            FavoriteItem(gr: gr, img: "sample1")
-                        }
-                    }.accentColor(.black)
+                    if self.favorites.count == 0 {
+                        Text("You haven't add any recipes at the moment")
+                            .font(.custom("Chalkboard SE", size: gr.size.width*0.05))
+                            .foregroundColor(Color(red: 64/255, green: 63/255, blue: 83/255))
+                            .padding()
+                        
+                        Image("logo")
+                            .resizable()
+                            .renderingMode(.original)
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: gr.size.width*0.54, height: gr.size.width*0.54)
+                    } else {
+                        NavigationLink(destination: RecipeDetailView(gr: gr, popup: $popup).navigationBarTitle("").navigationBarHidden(true), tag: 0, selection: $tag) {
+                            Button(action: {
+                                self.tag = 0
+                                self.popup.toggle()
+                            }) {
+                                FavoriteItem(gr: gr, img: "sample1")
+                            }
+                        }.accentColor(.black)
+                        
+                        NavigationLink(destination: RecipeDetailView(gr: gr, popup: $popup).navigationBarTitle("").navigationBarHidden(true), tag: 1, selection: $tag) {
+                            Button(action: {
+                                self.tag = 1
+                                self.popup.toggle()
+                            }) {
+                                FavoriteItem(gr: gr, img: "sample1")
+                            }
+                        }.accentColor(.black)
+
+                    }
                     
-                    NavigationLink(destination: RecipeDetailView(gr: gr, popup: $popup).navigationBarTitle("").navigationBarHidden(true), tag: 1, selection: $tag) {
-                        Button(action: {
-                            self.tag = 1
-                            self.popup.toggle()
-                        }) {
-                            FavoriteItem(gr: gr, img: "sample1")
-                        }
-                    }.accentColor(.black)
-                    
+
                 }.padding(.top)
             }
 
