@@ -36,10 +36,23 @@ struct CategoryView: View {
             
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    ForEach(DataService.instance.categoryRecipes, id: \.self) {
-                        item in
-                        RecipeItem(gr: self.gr, img: item.img, title: item.title, calories: "\(item.calories)")
+                    if DataService.instance.categoryRecipes.count == 0 {
+                        Text("No recipes available at the moment")
+                            .font(.custom("Chalkboard SE", size: gr.size.width*0.05))
+                            .foregroundColor(Color(red: 64/255, green: 63/255, blue: 83/255))
+                        
+                        Image("logo")
+                            .resizable()
+                            .renderingMode(.original)
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: gr.size.width*0.54, height: gr.size.width*0.54)
+                    } else {
+                        ForEach(DataService.instance.categoryRecipes, id: \.self) {
+                            item in
+                            RecipeItem(gr: self.gr, img: item.img, title: item.title, calories: "\(item.calories)")
+                        }
                     }
+                    
                     
                 }
             }.frame(width: gr.size.width)

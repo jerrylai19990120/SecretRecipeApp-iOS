@@ -20,7 +20,7 @@ struct SearchView: View {
         CategoryRowData(cate1: "Teatime", cate2: "Alcohol-cocktail", color1: Color(red: 123/255, green: 213/255, blue: 186/255), color2: Color(red: 242/255, green: 203/255, blue: 145/255), img1: "tea", img2: "cocktails", index1: 4, index2: 5),
         CategoryRowData(cate1: "Biscuits", cate2: "Bread", color1: Color(red: 253/255, green: 228/255, blue: 151/255), color2: Color(red: 189/255, green: 232/255, blue: 254/255), img1: "biscuits", img2: "bread", index1: 6, index2: 7),
         CategoryRowData(cate1: "Cereals", cate2: "Condiments", color1: Color(red: 247/255, green: 165/255, blue: 148/255), color2: Color(red: 188/255, green: 157/255, blue: 200/255), img1: "cereals", img2: "condiments", index1: 8, index2: 9),
-        CategoryRowData(cate1: "Drinks", cate2: "Deserts", color1: Color(red: 123/255, green: 213/255, blue: 186/255), color2: Color(red: 242/255, green: 203/255, blue: 145/255), img1: "drinks", img2: "desert", index1: 10, index2: 11),
+        CategoryRowData(cate1: "Drinks", cate2: "Desserts", color1: Color(red: 123/255, green: 213/255, blue: 186/255), color2: Color(red: 242/255, green: 203/255, blue: 145/255), img1: "drinks", img2: "desert", index1: 10, index2: 11),
         CategoryRowData(cate1: "Egg", cate2: "Main Course", color1: Color(red: 253/255, green: 228/255, blue: 151/255), color2: Color(red: 189/255, green: 232/255, blue: 254/255), img1: "egg", img2: "main", index1: 12, index2: 13),
         CategoryRowData(cate1: "Omelet", cate2: "Pancake", color1: Color(red: 247/255, green: 165/255, blue: 148/255), color2: Color(red: 188/255, green: 157/255, blue: 200/255), img1: "omelet", img2: "pancakeBg", index1: 14, index2: 15),
         CategoryRowData(cate1: "Preps", cate2: "Preserve", color1: Color(red: 123/255, green: 213/255, blue: 186/255), color2: Color(red: 242/255, green: 203/255, blue: 145/255), img1: "preps", img2: "preserve", index1: 16, index2: 17),
@@ -52,7 +52,7 @@ struct SearchView: View {
                     }
                     
                 }.padding(.bottom)
-            }
+            }.padding(.bottom, gr.size.height*0.09)
             
         }.padding([.top, .leading, .trailing])
     }

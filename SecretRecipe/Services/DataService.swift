@@ -25,14 +25,14 @@ class DataService {
     var mealType = ["Breakfast", "Lunch", "Dinner", "Snack", "Teatime"]
     
     var dishType = ["Alcohol-cocktail",
-    "Biscuits and cookies",
+    "Biscuits",
     "Bread",
     "Cereals",
-    "Condiments and sauces",
+    "Condiments",
     "Drinks",
     "Desserts",
     "Egg",
-    "Main course",
+    "Main Course",
     "Omelet",
     "Pancake",
     "Preps",
@@ -46,21 +46,44 @@ class DataService {
         
         categoryRecipes = []
         
-        let urlString = "https://api.edamam.com/search?q=f&app_id=\(APP_ID)&app_key=\(API_KEY)&cuisineType=\(category)&to=100"
+        var urlString = "https://api.edamam.com/search?q=f&app_id=\(APP_ID)&app_key=\(API_KEY)&cuisineType=\(category)&to=100"
+        
+        if mealType.contains(category) {
+            
+            urlString = "https://api.edamam.com/search?q=f&app_id=\(APP_ID)&app_key=\(API_KEY)&mealType=\(category)&to=100"
+        } else if dishType.contains(category) {
+            
+            urlString = "https://api.edamam.com/search?q=f&app_id=\(APP_ID)&app_key=\(API_KEY)&dishType=\(category)&to=100"
+        }
+        
+        
         
         let url = urlString.replacingOccurrences(of: " ", with: "%20")
         
         AF.request(url).responseJSON { (res) in
-            print(res)
+            
             if res.error == nil {
                 do {
                     let data = res.data
                     let json = try? JSON(data: data!)
                     
+                    
                     guard let recipes = json!["hits"].array else {
                         completion(false)
                         return
                     }
+                    
+                    guard let exists = json?["more"] else {
+                        completion(false)
+                        return
+                    }
+                    
+                    if !exists.boolValue {
+                        completion(true)
+                        return
+                    }
+                    
+                
                     
                     for recipe in recipes {
                         var health = [String]()

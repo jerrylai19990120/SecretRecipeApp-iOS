@@ -45,7 +45,7 @@ struct RecipeView: View {
                     RecipeItem(gr: gr, img: "5")
                     RecipeItem(gr: gr, img: "6")*/
                 }.frame(width: gr.size.width)
-            }.padding(.bottom, 1)
+            }.padding(.bottom, gr.size.height*0.09)
             .frame(width: gr.size.width)
            
         }
