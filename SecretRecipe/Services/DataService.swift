@@ -23,6 +23,8 @@ class DataService {
     
     var categoryRecipes = [Recipe]()
     
+    var searchRecipes = [Recipe]()
+    
     var mealType = ["Breakfast", "Lunch", "Dinner", "Snack", "Teatime"]
     
     var dishType = ["Alcohol-cocktail",
@@ -143,6 +145,90 @@ class DataService {
                     completion(true)
                     
                 } catch {
+                    completion(false)
+                    print(error.localizedDescription)
+                }
+            } else {
+                completion(false)
+            }
+        }
+        
+    }
+    
+    
+    func getHotAndTrending(_ query: String, completion: @escaping (_ status: Bool)->()){
+        
+        var urlString = "https://api.edamam.com/search?q=f&app_id=\(APP_ID)&app_key=\(API_KEY)"
+        
+        
+    }
+    
+    func getSearchRecipe(_ query: String, completion: @escaping (_ status: Bool)->()){
+        
+        self.searchRecipes = []
+        
+        var urlString = "https://api.edamam.com/search?q=\(query)&app_id=\(APP_ID)&app_key=\(API_KEY)"
+        
+        AF.request(urlString).responseJSON { (res) in
+            if res.error == nil {
+                do {
+                        let data = res.data
+                        let json = try? JSON(data: data!)
+                        
+                        
+                        guard let recipes = json!["hits"].array else {
+                            completion(false)
+                            return
+                        }
+                        
+                        guard let exists = json?["more"] else {
+                            completion(false)
+                            return
+                        }
+                        
+                        if !exists.boolValue {
+                            completion(true)
+                            return
+                        }
+                        
+                    
+                        
+                        for recipe in recipes {
+                            var health = [String]()
+                            var diet = [String]()
+                            var ingredients = [String]()
+                            
+                            let calories = Int(Double(recipe["recipe"]["calories"].stringValue)!)
+                            let totalWeight = Int(Double(recipe["recipe"]["totalWeight"].stringValue)!)
+                            let title = recipe["recipe"]["label"].stringValue
+                            let img = recipe["recipe"]["image"].stringValue
+                            let servings = recipe["recipe"]["yield"].intValue
+                            let healthLbls = recipe["recipe"]["healthLabels"].array
+                            let dietLbls = recipe["recipe"]["dietLabels"].array
+                            let ingred = recipe["recipe"]["ingredientLines"].array
+                            
+                            for i in healthLbls! {
+                                health.append(i.stringValue)
+                            }
+                            
+                            for i in dietLbls! {
+                                diet.append(i.stringValue)
+                            }
+                            
+                            for i in ingred! {
+                                ingredients.append(i.stringValue)
+                            }
+                            
+                            let result = Recipe(title: title, img: img, calories: calories, totalWeight: totalWeight, dietLabels: diet, healthLabel: health, ingredients: ingredients, isFavorite: false, servings: servings)
+                            
+                            self.searchRecipes.append(result)
+                        }
+                        completion(true)
+
+                    
+                    
+                } catch {
+                    completion(false)
                     print(error.localizedDescription)
                 }
             } else {

@@ -14,19 +14,30 @@ struct SearchView: View {
     
     var gr: GeometryProxy
     
+    @State var results = [Recipe]()
+    
     var body: some View {
         VStack {
             
             TitleBar(gr: gr)
             
-            SearchBar(gr: gr, query: $query)
+            SearchBar(gr: gr, query: $query, results: $results)
             
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     
-                    ForEach(DataService.instance.categories, id: \.self){ item in
-                        CategoryRow(gr: self.gr, cate1: item.cate1, cate2: item.cate2, color1: item.color1, color2: item.color2, img1: item.img1, img2: item.img2, index1: item.index1, index2: item.index2)
+                    if query == "" {
+                        ForEach(DataService.instance.categories, id: \.self){ item in
+                            CategoryRow(gr: self.gr, cate1: item.cate1, cate2: item.cate2, color1: item.color1, color2: item.color2, img1: item.img1, img2: item.img2, index1: item.index1, index2: item.index2)
+                        }
+                    } else {
+                        ForEach(self.results, id: \.self) {
+                            item in
+                            RecipeItem(gr: self.gr, img: item.img, title: item.title, calories: "\(item.calories)")
+                        }
                     }
+                    
+                    
                     
                 }.padding(.bottom)
             }.padding(.bottom, gr.size.height*0.09)
@@ -123,13 +134,24 @@ struct SearchBar: View {
     
     @Binding var query: String
     
+    @Binding var results: [Recipe]
+    
     var body: some View {
         HStack {
             Image(systemName: "magnifyingglass")
                 .font(.system(size: gr.size.width*0.04))
                 .foregroundColor(.green)
             
-            TextField("Search", text: $query)
+            TextField("Search", text: $query, onEditingChanged: { (success) in
+                
+            }) {
+                DataService.instance.getSearchRecipe(self.query) { (done) in
+                    if done {
+                        self.results = []
+                        self.results = DataService.instance.searchRecipes
+                    }
+                }
+            }
             
         }.padding(.all, gr.size.width*0.026)
             .overlay(RoundedRectangle(cornerRadius: 30).stroke(Color.init(white: 0.8), lineWidth: 1))
