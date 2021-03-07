@@ -14,6 +14,8 @@ struct RecipeView: View {
     
     var gr: GeometryProxy
     
+     @State var trends: [Recipe] = [Recipe(title: "no info", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: ["no info"], ingredients: [""], isFavorite: false, servings: 0)]
+    
     var body: some View {
         VStack {
             HStack {
@@ -28,7 +30,13 @@ struct RecipeView: View {
                 HStack {
                     ForEach(DataService.instance.categories, id: \.self){
                         item in
-                        BannerCategory(gr: self.gr, color: item.color1, img: "2", category: item.cate1).padding()
+                        HStack {
+                            BannerCategory(gr: self.gr, color: item.color1, img: item.img1, category: item.cate1, index: item.index1).padding()
+                            
+                            BannerCategory(gr: self.gr, color: item.color2, img: item.img2, category: item.cate2, index: item.index2).padding()
+                        }
+                        
+                        
 
                     }
                     
@@ -38,17 +46,23 @@ struct RecipeView: View {
             Divider().padding(.bottom, gr.size.width*0.026)
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    Text("")
-                    /*RecipeItem(gr: gr, img: "1")
-                    RecipeItem(gr: gr, img: "2")
-                    RecipeItem(gr: gr, img: "3")
-                    RecipeItem(gr: gr, img: "4")
-                    RecipeItem(gr: gr, img: "5")
-                    RecipeItem(gr: gr, img: "6")*/
+                    if self.trends.count != 0 {
+                        ForEach(self.trends, id: \.self){
+                            item in
+                            RecipeItem(gr: self.gr, img: item.img, title: item.title, calories: "\(item.calories)")
+                        }
+                    }
+                    
                 }.frame(width: gr.size.width)
-            }.padding(.bottom, gr.size.height*0.09)
+            }
+            .padding([.top, .bottom])
             .frame(width: gr.size.width)
            
+        }.onAppear {
+            DataService.instance.getHotAndTrending(isTrending: true) { (success) in
+                self.trends = []
+                self.trends = DataService.instance.trendingRecipes
+            }
         }
     }
 }

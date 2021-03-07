@@ -63,6 +63,7 @@ struct RecipeItem: View {
                 .renderingMode(.original)
                 .aspectRatio(contentMode: .fill)
                 .frame(width: gr.size.width*0.3, height: gr.size.height*0.23)
+                .clipped()
                 .offset(x: -gr.size.width*0.28)
                 .shadow(radius: 6)
             

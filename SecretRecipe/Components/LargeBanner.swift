@@ -18,18 +18,20 @@ struct LargeBanner: View {
     
     var description = "Quick & Easy"
     
-    var rating = "4.6"
+    var calories = 546
     
-    var cookTime = "26 mins"
+    var weight = 544
     
-    var difficulty = "easy"
+    var serving = 2
+    
+    @State var customImg: UIImage = UIImage(named: "logo")!
     
     var body: some View {
         ZStack {
-            Image(img).resizable()
+            Image(uiImage: self.customImg).resizable()
                 .renderingMode(.original)
                 .aspectRatio(contentMode: .fill)
-                .frame(width: gr.size.width*0.8, height: gr.size.height*0.3)
+                .frame(width: gr.size.width*0.88, height: gr.size.height*0.3)
                 .clipped()
                 .cornerRadius(10)
             
@@ -40,24 +42,24 @@ struct LargeBanner: View {
                 Text(description)
                     .foregroundColor(.gray)
                     .font(.system(size: gr.size.width*0.043, weight: .medium, design: .rounded))
-                Rectangle().fill(Color.gray).frame(width: gr.size.width*0.57, height: 1)
+                Rectangle().fill(Color.gray).frame(width: gr.size.width*0.69, height: 1)
                     .padding([.top, .bottom],4)
                 HStack {
                     HStack {
                         Image(systemName: "star.fill")
                             .foregroundColor(.yellow)
-                        Text(rating)
+                        Text("\(calories) kCal")
                     }
                     
                     HStack {
                         Image(systemName: "clock")
                             .foregroundColor(.blue)
-                        Text(cookTime)
+                        Text("\(weight) g")
                     }
                     HStack {
                         Image(systemName: "lightbulb")
                             .foregroundColor(.orange)
-                        Text(difficulty)
+                        Text("\(serving) servings")
                     }
                 }
             }.padding()
@@ -70,7 +72,41 @@ struct LargeBanner: View {
             
                 
             
+        }.onAppear {
+            self.loadImage(imgUrl: self.img) { (success) in
+                
             }
+        }
+    }
+    
+    func loadImage(imgUrl: String, completion: @escaping (_ status: Bool)->()) {
+        
+        let urlString = imgUrl.replacingOccurrences(of: " ", with: "%20")
+        
+        guard let url = URL(string: urlString) else {
+            completion(false)
+            return
+        }
+        
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, res, error) in
+            guard let data = data else {
+                completion(false)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                guard let img = UIImage(data: data) else {
+                    completion(false)
+                    return
+                }
+                self.customImg = img
+                completion(true)
+            }
+        }
+               
+        task.resume()
+
     }
 }
 

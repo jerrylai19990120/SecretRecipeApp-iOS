@@ -18,6 +18,10 @@ struct BannerCategory: View {
     
     var category = "Vegetarian: Discover more"
     
+    var index: Int
+    
+    @State var tag: Int?
+    
     var body: some View {
         HStack {
             VStack {
@@ -29,14 +33,22 @@ struct BannerCategory: View {
                 Button(action: {
                     
                 }) {
-                    VStack(spacing: 3) {
-                        Text("View More")
-                            .font(.custom("Chalkboard SE", size: gr.size.width*0.05))
-                            .fontWeight(.thin)
+                    NavigationLink(destination: CategoryView(gr: gr, category: self.category).navigationBarTitle("").navigationBarHidden(true), tag: self.index, selection: self.$tag) {
                         
-                        RoundedRectangle(cornerRadius: 10)
-                            .frame(width: gr.size.width*0.18, height: 1)
-                    }.foregroundColor(Color(red: 83/255, green: 82/255, blue: 108/255))
+                        Button(action: {
+                            self.tag = self.index
+                        }) {
+                            VStack(spacing: 3) {
+                                Text("View More")
+                                    .font(.custom("Chalkboard SE", size: gr.size.width*0.05))
+                                    .fontWeight(.thin)
+                                
+                                RoundedRectangle(cornerRadius: 10)
+                                    .frame(width: gr.size.width*0.18, height: 1)
+                            }.foregroundColor(Color(red: 83/255, green: 82/255, blue: 108/255))
+                        }
+                    }
+                    
                     
                 }
             }.padding()
@@ -44,21 +56,26 @@ struct BannerCategory: View {
             Image(img)
                 .resizable()
                 .renderingMode(.original)
-                .frame(width: gr.size.width*0.20, height: gr.size.width*0.280)
-            .padding()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: gr.size.width*0.3, height: gr.size.width*0.280)
+                .clipped()
+                .padding(.trailing)
         }.padding()
         .frame(width: gr.size.width*0.8, height: gr.size.height*0.21)
         .background(color)
         .cornerRadius(26)
         
+        
     }
+    
+    
 }
 
 struct BannerCategory_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader {
             gr in
-            BannerCategory(gr: gr)
+            BannerCategory(gr: gr, index: 2)
         }
         
     }

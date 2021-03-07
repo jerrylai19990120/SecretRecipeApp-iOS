@@ -156,9 +156,95 @@ class DataService {
     }
     
     
-    func getHotAndTrending(_ query: String, completion: @escaping (_ status: Bool)->()){
+    func getHotAndTrending(isTrending: Bool, completion: @escaping (_ status: Bool)->()){
         
-        var urlString = "https://api.edamam.com/search?q=f&app_id=\(APP_ID)&app_key=\(API_KEY)"
+        if isTrending {
+            if self.trendingRecipes.count != 0 {
+                completion(true)
+                return
+            }
+        } else {
+            if self.hotRecipes.count != 0 {
+                completion(true)
+                return
+            }
+        }
+        
+        let chars = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+        
+        let randomChar = chars.randomElement()!
+        
+        var urlString = "https://api.edamam.com/search?q=\(randomChar)&app_id=\(APP_ID)&app_key=\(API_KEY)"
+        
+        AF.request(urlString).responseJSON { (res) in
+            if res.error == nil {
+                do {
+                    let data = res.data
+                    let json = try? JSON(data: data!)
+                        
+                        
+                    guard let recipes = json!["hits"].array else {
+                        completion(false)
+                        return
+                    }
+                        
+                    guard let exists = json?["more"] else {
+                        completion(false)
+                        return
+                    }
+                        
+                    if !exists.boolValue {
+                        completion(true)
+                        return
+                    }
+                        
+                    
+                        
+                    for recipe in recipes {
+                        var health = [String]()
+                        var diet = [String]()
+                        var ingredients = [String]()
+                        
+                        let calories = Int(Double(recipe["recipe"]["calories"].stringValue)!)
+                        let totalWeight = Int(Double(recipe["recipe"]["totalWeight"].stringValue)!)
+                        let title = recipe["recipe"]["label"].stringValue
+                        let img = recipe["recipe"]["image"].stringValue
+                        let servings = recipe["recipe"]["yield"].intValue
+                        let healthLbls = recipe["recipe"]["healthLabels"].array
+                        let dietLbls = recipe["recipe"]["dietLabels"].array
+                        let ingred = recipe["recipe"]["ingredientLines"].array
+                            
+                        for i in healthLbls! {
+                            health.append(i.stringValue)
+                        }
+                            
+                        for i in dietLbls! {
+                            diet.append(i.stringValue)
+                        }
+                            
+                        for i in ingred! {
+                            ingredients.append(i.stringValue)
+                        }
+                            
+                        let result = Recipe(title: title, img: img, calories: calories, totalWeight: totalWeight, dietLabels: diet, healthLabel: health, ingredients: ingredients, isFavorite: false, servings: servings)
+                         
+                        if isTrending {
+                            self.trendingRecipes.append(result)
+                        } else {
+                            self.hotRecipes.append(result)
+                        }
+                            
+                    }
+                    completion(true)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            } else {
+                completion(false)
+            }
+        }
+        
+        
         
         
     }
@@ -237,6 +323,8 @@ class DataService {
         }
         
     }
+    
+    
     
     
 }

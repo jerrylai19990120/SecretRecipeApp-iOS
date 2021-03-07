@@ -14,6 +14,10 @@ struct HomeView: View {
     
     var color = Color(red: 255/255, green: 195/255, blue: 60/255)
     
+    @State var hots: [Recipe] = [Recipe(title: "no info", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: ["no info"], ingredients: [""], isFavorite: false, servings: 0)]
+    
+    @State var trends: [Recipe] = [Recipe(title: "no info", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: ["no info"], ingredients: [""], isFavorite: false, servings: 0)]
+    
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
@@ -53,28 +57,46 @@ struct HomeView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack {
-                            LargeBanner(gr: gr).padding(.bottom,gr.size.height*0.11)
-                                .padding(.trailing)
-                            LargeBanner(gr: gr).padding(.bottom,gr.size.height*0.11)
-                                .padding(.trailing)
-                            LargeBanner(gr: gr).padding(.bottom,gr.size.height*0.11)
-                                .padding(.trailing)
+                            if self.trends.count != 0 {
+                                ForEach(self.trends, id: \.self){
+                                    item in
+                                    LargeBanner(gr: self.gr, img: item.img, title: item.title, description: item.healthLabel[0], calories: item.calories, weight: item.totalWeight, serving: item.servings).padding(.bottom,self.gr.size.height*0.11)
+                                        .padding(.trailing)
+                                }
+                            }
+                        
+                            
                         }.padding(.leading)
                     }
                     SubHeader(gr: gr, color: color, title: "Hot Recipes", subtitle: "More")
                     
-                    ScrollView(.vertical, showsIndicators: false) {
-                        VStack(alignment: .leading, spacing: gr.size.height*0.04) {
-                            DailyHotRecipe(gr: gr)
-                            DailyHotRecipe(gr: gr)
-                            DailyHotRecipe(gr: gr)
+                    
+                    VStack(alignment: .leading, spacing: gr.size.height*0.04) {
+                        if self.hots.count != 0 {
+                            ForEach(self.hots, id: \.self){
+                                item in
+                                DailyHotRecipe(gr: self.gr, title: item.title, desc: item.healthLabel.joined(separator: ", "), img: item.img)
+                            }
                         }
-                    }
+                            
+                    }.padding(.bottom, gr.size.height*0.05)
+                    
                 }.padding()
             }
             
         }.offset(y: -gr.size.height*0.12)
         .frame(height: gr.size.height+gr.size.height*0.12)
+        .onAppear {
+            DataService.instance.getHotAndTrending(isTrending: true) { (success) in
+                self.trends = []
+                self.trends = DataService.instance.trendingRecipes
+                
+            }
+            DataService.instance.getHotAndTrending(isTrending: false) { (success) in
+                self.hots = []
+                self.hots = DataService.instance.hotRecipes
+            }
+        }
     }
 }
 
