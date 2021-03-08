@@ -23,7 +23,7 @@ struct DetailComponent: View {
                 .font(.system(size: gr.size.width*0.06, weight: .medium, design: .rounded))
                 .padding(.leading, gr.size.width*0.08)
                 
-            Text(recipe.healthLabel[0])
+            Text(recipe.healthLabel.count != 0 ? recipe.healthLabel[0] : "Try out this new recipe")
                 .font(.system(size: gr.size.width*0.05, weight: .medium, design: .rounded))
                 .foregroundColor(.gray)
                 .padding(.top, 8)
@@ -51,19 +51,19 @@ struct DetailComponent: View {
             .padding(.leading, gr.size.width*0.08)
             
             VStack(spacing: 0) {
-                CustomTopTabBar(gr: gr, selection: $selection)
+                CustomTopTabBar(gr: gr, selection: $selection, recipe: recipe)
                 
                 if selection == -1 {
-                    Introduction(gr: gr)
+                    Introduction(gr: gr, recipe: recipe)
                     
                 }
                 
                 if selection == 0 {
-                    Ingredients(gr: gr)
+                    Ingredients(gr: gr, recipe: recipe)
                 }
                 
                 if selection == 1 {
-                    Instrutions(gr: gr)
+                    Instrutions(gr: gr, recipe: recipe)
                 }
 
             }

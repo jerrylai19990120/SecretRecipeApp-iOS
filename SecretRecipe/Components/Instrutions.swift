@@ -28,6 +28,8 @@ struct Instrutions: View {
         "Serve with shredded cheddar, chopped onion, and Fritos."
     ]
     
+    var recipe: Recipe
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: gr.size.height*0.023) {
@@ -53,7 +55,7 @@ struct Instrutions: View {
 struct Preparations_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { gr in
-            Instrutions(gr: gr)
+            Instrutions(gr: gr, recipe: Recipe(title: "", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: [], ingredients: [], isFavorite: false, servings: 0))
         }
     }
 }

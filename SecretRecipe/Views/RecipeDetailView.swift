@@ -64,7 +64,9 @@ struct RecipeDetailView: View {
                                 .frame(width: gr.size.width*0.07, height: gr.size.width*0.07)
                                 .onTapGesture {
                                     self.isFavorite.toggle()
-                                    DataService.instance.loadFavoriteRecipe()
+                                    var favors = DataService.instance.loadFavoriteRecipes()
+                                    favors.append(self.recipe)
+                                    DataService.instance.saveFavoriteRecipes(favors)
                             }
                         }.padding(.top, gr.size.height*0.1)
                         
@@ -82,7 +84,7 @@ struct RecipeDetailView: View {
                         .offset(y: !popup ? gr.size.height+88 : -gr.size.height*0.4)
                         
                     
-                    DetailComponent(gr: gr).padding(.top, 40)
+                    DetailComponent(gr: gr, recipe: self.recipe).padding(.top, 40)
                         .offset(y: !popup ? gr.size.height+88 : -gr.size.height*0.18)
                         
                 }.animation(.default)
@@ -93,10 +95,10 @@ struct RecipeDetailView: View {
             
         }.padding(.top, gr.size.height*0.46)
         .edgesIgnoringSafeArea(.top)
-            .onAppear {
+        .onAppear {
                 self.loadImage(imgUrl: self.recipe.img) { (success) in
                     
-                }
+            }
         }
         
     }

@@ -74,7 +74,7 @@ struct FavoriteView: View {
                                     self.tag = i
                                     self.popup.toggle()
                                 }) {
-                                    FavoriteItem(gr: self.gr, img: "sample1")
+                                    FavoriteItem(gr: self.gr, title: self.favorites[i].title, desc: self.favorites.count != 0 ? self.favorites[i].healthLabel[0] : "Click to view recipe", img: self.favorites[i].img, calories: self.favorites[i].calories, weight: self.favorites[i].totalWeight, servings: self.favorites[i].servings)
                                 }
                             }.accentColor(.black)
                         }
@@ -82,11 +82,15 @@ struct FavoriteView: View {
                     }
                     
 
-                }.padding(.top)
-            }
+                }.padding(.top).frame(width: gr.size.width)
+            }.padding(.bottom, gr.size.height*0.05)
 
         }.offset(y: -gr.size.height*0.12)
         .frame(height: gr.size.height+gr.size.height*0.12)
+            .onAppear {
+                self.favorites = []
+                self.favorites = DataService.instance.loadFavoriteRecipes()
+        }
     }
 }
 

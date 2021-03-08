@@ -16,28 +16,16 @@ struct Ingredients: View {
     
     var mainTextColor = Color(red: 97/255, green: 106/255, blue: 140/255)
     
-    var title = "Chicken Alfredo"
-    
-    var ingredients = [
-        "2 garlic cloves",
-        "1 teaspoon ground oregano",
-        "1 tablespoon ground cumin",
-        "¼ teaspoon cayenne pepper (optional)",
-        "2 tablespoons chili powder",
-        "2 pounds ground beef",
-        "One 8-ounce can tomato sauce",
-        "1 teaspoon salt",
-        "¼ cup masa (corn flour, found in Mexican food section of many supermarkets)"
-        ]
+    var recipe: Recipe
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: gr.size.height*0.012) {
-                Text("For \(title)")
+                Text("For \(recipe.title)")
                     .foregroundColor(mainTextColor)
                     .font(.system(size: gr.size.width*0.05, weight: .semibold, design: .rounded))
                     .padding(.bottom)
-                ForEach(self.ingredients, id: \.self){ item in
+                ForEach(recipe.ingredients, id: \.self){ item in
                     Text("•\(item)")
                         .foregroundColor(self.subTextColor)
                 }
@@ -56,7 +44,7 @@ struct Ingredients: View {
 struct Ingredients_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { gr in
-            Ingredients(gr: gr)
+            Ingredients(gr: gr, recipe: Recipe(title: "", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: [], ingredients: [], isFavorite: false, servings: 0))
         }
     }
 }

@@ -18,6 +18,8 @@ struct CustomTopTabBar: View {
     
     var inactiveColor = Color(red: 124/255, green: 150/255, blue: 164/255)
     
+    var recipe: Recipe
+    
     var body: some View {
         VStack {
             HStack {
@@ -44,7 +46,7 @@ struct CustomTopTabBar: View {
                 Button(action: {
                     self.selection = 1
                 }) {
-                    Text("Instructions")
+                    Text("Nutrition")
                         .foregroundColor(selection == 1 ? activeColor : inactiveColor)
                 }
                 
@@ -65,7 +67,7 @@ struct CustomTopTabBar: View {
 struct CustomTopTabBar_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { gr in
-            CustomTopTabBar(gr: gr, selection: .constant(-1))
+            CustomTopTabBar(gr: gr, selection: .constant(-1), recipe: Recipe(title: "", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: [], ingredients: [], isFavorite: false, servings: 0))
         }
     }
 }

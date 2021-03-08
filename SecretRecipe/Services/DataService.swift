@@ -326,24 +326,29 @@ class DataService {
     
     
     //Save user favorite recipes to user default
-    func saveFavoriteRecipe(_ recipe: Recipe){
+    func saveFavoriteRecipes(_ recipes: [Recipe]){
         let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(recipe) {
+        if let encoded = try? encoder.encode(recipes) {
             let defaults = UserDefaults.standard
-            defaults.set(encoded, forKey: "savedRecipe1")
+            defaults.set(encoded, forKey: "savedRecipes")
         }
     }
     
     //load saved recipes from user default
-    func loadFavoriteRecipe(){
-        if let savedRecipe = UserDefaults.standard.object(forKey: "savedRecipe1") as? Data {
+    func loadFavoriteRecipes()->[Recipe]{
+        
+        if let savedRecipes = UserDefaults.standard.object(forKey: "savedRecipes") as? Data {
             
             let decoder = JSONDecoder()
-            if let loadedRecipe = try? decoder.decode(Recipe.self, from: savedRecipe){
-                print(loadedRecipe)
+            if let loadedRecipes = try? decoder.decode([Recipe].self, from: savedRecipes){
+                return loadedRecipes
             }
+            return []
+        } else {
+            return []
         }
-        
     }
+    
+    
     
 }
