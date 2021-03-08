@@ -16,6 +16,10 @@ struct RecipeView: View {
     
      @State var trends: [Recipe] = [Recipe(title: "no info", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: ["no info"], ingredients: [""], isFavorite: false, servings: 0)]
     
+    @State var popup = false
+    
+    @State var selection: Int?
+    
     var body: some View {
         VStack {
             HStack {
@@ -48,14 +52,32 @@ struct RecipeView: View {
                 VStack {
                     if self.trends.count != 0 {
                         if self.trends.count <= 10 {
-                            ForEach(self.trends, id: \.self){
-                                item in
-                                RecipeItem(gr: self.gr, img: item.img, title: item.title, calories: "\(item.calories)")
+                            ForEach(0..<self.trends.count, id: \.self){
+                                i in
+                                NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$selection) {
+                                    Button(action: {
+                                        self.selection = i
+                                        self.popup.toggle()
+                                    }) {
+                                        RecipeItem(gr: self.gr, img: self.trends[i].img, title: self.trends[i].title, calories: "\(self.trends[i].calories)")
+                                    }
+                                }.accentColor(.black)
+                                
                             }
                         } else {
+                            
                             ForEach(0...9, id: \.self){
                                 i in
-                                RecipeItem(gr: self.gr, img: self.trends[i].img, title: self.trends[i].title, calories: "\(self.trends[i].calories)")
+                                NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i+10, selection: self.$selection) {
+                                    Button(action: {
+                                        self.selection = i + 10
+                                        self.popup.toggle()
+                                    }) {
+                                        RecipeItem(gr: self.gr, img: self.trends[i].img, title: self.trends[i].title, calories: "\(self.trends[i].calories)")
+                                    }
+                                }.accentColor(.black)
+                                
+                                
                             }
                         }
                         

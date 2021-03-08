@@ -67,23 +67,17 @@ struct FavoriteView: View {
                             .aspectRatio(contentMode: .fit)
                             .frame(width: gr.size.width*0.54, height: gr.size.width*0.54)
                     } else {
-                        NavigationLink(destination: RecipeDetailView(gr: gr, popup: $popup).navigationBarTitle("").navigationBarHidden(true), tag: 0, selection: $tag) {
-                            Button(action: {
-                                self.tag = 0
-                                self.popup.toggle()
-                            }) {
-                                FavoriteItem(gr: gr, img: "sample1")
-                            }
-                        }.accentColor(.black)
-                        
-                        NavigationLink(destination: RecipeDetailView(gr: gr, popup: $popup).navigationBarTitle("").navigationBarHidden(true), tag: 1, selection: $tag) {
-                            Button(action: {
-                                self.tag = 1
-                                self.popup.toggle()
-                            }) {
-                                FavoriteItem(gr: gr, img: "sample1")
-                            }
-                        }.accentColor(.black)
+                        ForEach(0..<self.favorites.count, id: \.self){
+                            i in
+                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.favorites[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$tag) {
+                                Button(action: {
+                                    self.tag = i
+                                    self.popup.toggle()
+                                }) {
+                                    FavoriteItem(gr: self.gr, img: "sample1")
+                                }
+                            }.accentColor(.black)
+                        }
 
                     }
                     
