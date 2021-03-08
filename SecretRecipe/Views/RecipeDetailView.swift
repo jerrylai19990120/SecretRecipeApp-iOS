@@ -40,7 +40,7 @@ struct RecipeDetailView: View {
                     
                     VStack {
                         HStack {
-                            NavigationLink(destination: TabNavView(selectionIndex: 2).navigationBarTitle("").navigationBarHidden(true), tag: 1, selection: $tag) {
+                            NavigationLink(destination: TabNavView(selectionIndex: 0).navigationBarTitle("").navigationBarHidden(true), tag: 1, selection: $tag) {
                                 
                                 Button(action: {
                                     self.tag = 1
@@ -64,6 +64,7 @@ struct RecipeDetailView: View {
                                 .frame(width: gr.size.width*0.07, height: gr.size.width*0.07)
                                 .onTapGesture {
                                     self.isFavorite.toggle()
+                                    DataService.instance.loadFavoriteRecipe()
                             }
                         }.padding(.top, gr.size.height*0.1)
                         

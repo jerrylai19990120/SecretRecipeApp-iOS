@@ -37,6 +37,7 @@
 		92A1A95025EFFE7D00FB64BB /* LargeBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A1A94F25EFFE7D00FB64BB /* LargeBanner.swift */; };
 		92A1A95225F00CE600FB64BB /* DailyHotRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A1A95125F00CE600FB64BB /* DailyHotRecipe.swift */; };
 		92A1A95425F0169200FB64BB /* FavoriteItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A1A95325F0169200FB64BB /* FavoriteItem.swift */; };
+		92AD4D5F25F5ED3300439E97 /* FavorRecipe.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 92AD4D5D25F5ED3300439E97 /* FavorRecipe.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,7 @@
 		92A1A94F25EFFE7D00FB64BB /* LargeBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeBanner.swift; sourceTree = "<group>"; };
 		92A1A95125F00CE600FB64BB /* DailyHotRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyHotRecipe.swift; sourceTree = "<group>"; };
 		92A1A95325F0169200FB64BB /* FavoriteItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteItem.swift; sourceTree = "<group>"; };
+		92AD4D5E25F5ED3300439E97 /* FavorRecipe.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavorRecipe.xcdatamodel; sourceTree = "<group>"; };
 		E2B3953498FDF85904C0AEF1 /* Pods-SecretRecipe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecretRecipe.release.xcconfig"; path = "Target Support Files/Pods-SecretRecipe/Pods-SecretRecipe.release.xcconfig"; sourceTree = "<group>"; };
 		FD7A4AC611C878D6D023A2F2 /* Pods_SecretRecipe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SecretRecipe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFEA0EBC6469E7C4BC9BFFBA /* Pods-SecretRecipe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SecretRecipe.debug.xcconfig"; path = "Target Support Files/Pods-SecretRecipe/Pods-SecretRecipe.debug.xcconfig"; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			children = (
 				92560C6E25F0607000BC76D1 /* Recipe.swift */,
 				922D8B8D25F2B5F000CA10F7 /* CategoryRowData.swift */,
+				92AD4D5D25F5ED3300439E97 /* FavorRecipe.xcdatamodeld */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				922D8B8625F18F8A00CA10F7 /* TrendsView.swift in Sources */,
 				92A1A94C25EEFE0500FB64BB /* RecipeItem.swift in Sources */,
 				92A1A94A25EEECE100FB64BB /* CategoryItem.swift in Sources */,
+				92AD4D5F25F5ED3300439E97 /* FavorRecipe.xcdatamodeld in Sources */,
 				92560C6F25F0607000BC76D1 /* Recipe.swift in Sources */,
 				92560C7A25F095E500BC76D1 /* Instrutions.swift in Sources */,
 				92560C7825F095D800BC76D1 /* Ingredients.swift in Sources */,
@@ -546,6 +550,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		92AD4D5D25F5ED3300439E97 /* FavorRecipe.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				92AD4D5E25F5ED3300439E97 /* FavorRecipe.xcdatamodel */,
+			);
+			currentVersion = 92AD4D5E25F5ED3300439E97 /* FavorRecipe.xcdatamodel */;
+			path = FavorRecipe.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 923A9D2625EDA7C2009D1D00 /* Project object */;
 }
