@@ -14,6 +14,10 @@ struct TrendsView: View {
     
     var color = Color(red: 255/255, green: 195/255, blue: 60/255)
     
+    @State var popup = false
+    
+    @State var selection: Int?
+    
     @State var trends: [Recipe] = [Recipe(title: "no info", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: ["no info"], ingredients: [""], isFavorite: false, servings: 0)]
     
     
@@ -60,9 +64,18 @@ struct TrendsView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     if self.trends.count != 0 {
-                        ForEach(self.trends, id: \.self){
-                            item in
-                            FavoriteItem(gr: self.gr, title: item.title, desc: item.healthLabel[0], img: item.img, calories: item.calories, weight: item.totalWeight, servings: item.servings)
+                        ForEach(0..<self.trends.count, id: \.self){
+                            i in
+                            
+                             NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$selection) {
+                                Button(action: {
+                                    self.selection = i
+                                    self.popup.toggle()
+                                }) {
+                                    FavoriteItem(gr: self.gr, title: self.trends[i].title, desc: self.trends[i].healthLabel.count != 0 ? self.trends[i].healthLabel[0] : "Tap to view recipe", img: self.trends[i].img, calories: self.trends[i].calories, weight: self.trends[i].totalWeight, servings: self.trends[i].servings)
+                                }
+                             }.accentColor(.black)
+                            
                         }
                     }
                 }.padding(.top)

@@ -12,22 +12,18 @@ struct DetailComponent: View {
     
     var gr: GeometryProxy
     
+    var recipe: Recipe = Recipe(title: "No info", img: "", calories: 0, totalWeight: 0, dietLabels: [""], healthLabel: [""], ingredients: [""], isFavorite: false, servings: 0)
+    
     @State var selection = -1
-    
-    var rating = "4.6"
-    
-    var cookTime = "26 mins"
-    
-    var difficulty = "easy"
     
     var body: some View {
         VStack(alignment: .leading) {
             
-            Text("California Pasta")
+            Text(recipe.title)
                 .font(.system(size: gr.size.width*0.06, weight: .medium, design: .rounded))
                 .padding(.leading, gr.size.width*0.08)
                 
-            Text("Easy, quick and yet so delicious!")
+            Text(recipe.healthLabel[0])
                 .font(.system(size: gr.size.width*0.05, weight: .medium, design: .rounded))
                 .foregroundColor(.gray)
                 .padding(.top, 8)
@@ -38,18 +34,18 @@ struct DetailComponent: View {
                 HStack {
                     Image(systemName: "star.fill")
                         .foregroundColor(.yellow)
-                    Text(rating)
+                    Text("\(recipe.calories) kCal")
                 }
                 
                 HStack {
                     Image(systemName: "clock")
                         .foregroundColor(.blue)
-                    Text(cookTime)
+                    Text("\(recipe.totalWeight) g")
                 }
                 HStack {
                     Image(systemName: "lightbulb")
                         .foregroundColor(.orange)
-                    Text(difficulty)
+                    Text("\(recipe.servings) servings")
                 }
             }.padding([.bottom, .trailing])
             .padding(.leading, gr.size.width*0.08)

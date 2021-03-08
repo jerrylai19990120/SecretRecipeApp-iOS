@@ -12,6 +12,8 @@ struct RecipeDetailView: View {
     
     var gr: GeometryProxy
     
+    var recipe: Recipe = Recipe(title: "No info", img: "", calories: 0, totalWeight: 0, dietLabels: [""], healthLabel: [""], ingredients: [""], isFavorite: false, servings: 0)
+    
     @State var selection = -1
     
     @Binding var popup: Bool
@@ -20,13 +22,15 @@ struct RecipeDetailView: View {
     
     @State var tag: Int?
     
+    @State var customImg: UIImage = UIImage(named: "logo")!
+    
     var body: some View {
         ZStack {
-            //Color(red: 243/255, green: 245/255, blue: 249/255)
+            
             VStack {
                 
                 ZStack {
-                    Image("sample1")
+                    Image(uiImage: customImg)
                         .resizable()
                         .renderingMode(.original)
                         .aspectRatio(contentMode: .fill)
@@ -88,8 +92,45 @@ struct RecipeDetailView: View {
             
         }.padding(.top, gr.size.height*0.46)
         .edgesIgnoringSafeArea(.top)
+            .onAppear {
+                self.loadImage(imgUrl: self.recipe.img) { (success) in
+                    
+                }
+        }
         
     }
+    
+    
+    func loadImage(imgUrl: String, completion: @escaping (_ status: Bool)->()) {
+        
+        let urlString = imgUrl.replacingOccurrences(of: " ", with: "%20")
+        
+        guard let url = URL(string: urlString) else {
+            completion(false)
+            return
+        }
+        
+        
+        let task = URLSession.shared.dataTask(with: url) { (data, res, error) in
+            guard let data = data else {
+                completion(false)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                guard let img = UIImage(data: data) else {
+                    completion(false)
+                    return
+                }
+                self.customImg = img
+                completion(true)
+            }
+        }
+               
+        task.resume()
+
+    }
+    
 }
 
 struct RecipeDetailView_Previews: PreviewProvider {

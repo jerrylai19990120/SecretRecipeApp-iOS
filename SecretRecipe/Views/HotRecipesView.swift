@@ -16,6 +16,10 @@ struct HotRecipesView: View {
     
     @State var hots: [Recipe] = [Recipe(title: "no info", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: ["no info"], ingredients: [""], isFavorite: false, servings: 0)]
     
+    @State var popup = false
+    
+    @State var selection: Int?
+    
     var body: some View {
         VStack(spacing: 0){
             ZStack {
@@ -60,9 +64,20 @@ struct HotRecipesView: View {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
                     if self.hots.count != 0 {
-                        ForEach(self.hots, id: \.self){
-                            item in
-                            FavoriteItem(gr: self.gr, title: item.title, desc: item.healthLabel[0], img: item.img, calories: item.calories, weight: item.totalWeight, servings: item.servings)
+                        ForEach(0..<self.hots.count, id: \.self){
+                            i in
+                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$selection) {
+                                Button(action: {
+                                    self.selection = i
+                                    self.popup.toggle()
+                                }) {
+                                    FavoriteItem(gr: self.gr, title: self.hots[i].title, desc: self.hots[i].healthLabel[0], img: self.hots[i].img, calories: self.hots[i].calories, weight: self.hots[i].totalWeight, servings: self.hots[i].servings)
+                                }
+                            }.accentColor(.black)
+                                
+                                
+                            
+                            
                         }
                     }
                     
