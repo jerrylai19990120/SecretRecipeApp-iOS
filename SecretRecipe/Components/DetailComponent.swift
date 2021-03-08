@@ -12,7 +12,7 @@ struct DetailComponent: View {
     
     var gr: GeometryProxy
     
-    var recipe: Recipe = Recipe(title: "No info", img: "", calories: 0, totalWeight: 0, dietLabels: [""], healthLabel: [""], ingredients: [""], isFavorite: false, servings: 0)
+    var recipe: Recipe = Recipe(title: "No info", img: "", calories: 0, totalWeight: 0, dietLabels: [""], healthLabel: [""], ingredients: [""], isFavorite: false, servings: 0, source: "No info", cuisineType: [], mealType: [], dishType: [])
     
     var nutrients: [Nutrient] = [Nutrient(label: "", quantity: "", unit: "")]
     

@@ -14,7 +14,7 @@ struct HotRecipesView: View {
     
     var color = Color(red: 255/255, green: 195/255, blue: 60/255)
     
-    @State var hots: [Recipe] = [Recipe(title: "no info", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: ["no info"], ingredients: [""], isFavorite: false, servings: 0)]
+    @State var hots: [Recipe] = [Recipe(title: "no info", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: ["no info"], ingredients: [""], isFavorite: false, servings: 0, source: "", cuisineType: [], mealType: [], dishType: [])]
     
     @State var popup = false
     

@@ -19,5 +19,9 @@ struct Recipe: Hashable, Codable {
     var ingredients: [String]
     var isFavorite: Bool
     var servings: Int
+    var source: String
+    var cuisineType: [String]
+    var mealType: [String]
+    var dishType: [String]
     
 }

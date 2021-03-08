@@ -131,6 +131,8 @@ class DataService {
                         let dietLbls = recipe["recipe"]["dietLabels"].array
                         let ingred = recipe["recipe"]["ingredientLines"].array
                         
+                        let source = recipe["recipe"]["source"].stringValue
+                        
                         for i in healthLbls! {
                             health.append(i.stringValue)
                         }
@@ -143,7 +145,7 @@ class DataService {
                             ingredients.append(i.stringValue)
                         }
                         
-                        let result = Recipe(title: title, img: img, calories: calories, totalWeight: totalWeight, dietLabels: diet, healthLabel: health, ingredients: ingredients, isFavorite: false, servings: servings)
+                        let result = Recipe(title: title, img: img, calories: calories, totalWeight: totalWeight, dietLabels: diet, healthLabel: health, ingredients: ingredients, isFavorite: false, servings: servings, source: source, cuisineType: [], mealType: [], dishType: [])
                         
                         self.categoryRecipes.append(result)
                         
@@ -230,6 +232,8 @@ class DataService {
                         
                         let dishType = recipe["recipe"]["dishType"].array
                         
+                        let source = recipe["recipe"]["source"].stringValue
+                        
                         if let cuisineTypes = cuisineType {
                             for i in cuisineTypes {
                                 cuisine.append(i.stringValue)
@@ -270,7 +274,7 @@ class DataService {
                         }
                         
                             
-                        let result = Recipe(title: title, img: img, calories: calories, totalWeight: totalWeight, dietLabels: diet, healthLabel: health, ingredients: ingredients, isFavorite: false, servings: servings)
+                        let result = Recipe(title: title, img: img, calories: calories, totalWeight: totalWeight, dietLabels: diet, healthLabel: health, ingredients: ingredients, isFavorite: false, servings: servings, source: source, cuisineType: cuisine, mealType: meal, dishType: dish)
                          
                         if isTrending {
                             self.trendingRecipes.append(result)
@@ -337,6 +341,8 @@ class DataService {
                             let dietLbls = recipe["recipe"]["dietLabels"].array
                             let ingred = recipe["recipe"]["ingredientLines"].array
                             
+                            let source = recipe["recipe"]["source"].stringValue
+                            
                             for i in healthLbls! {
                                 health.append(i.stringValue)
                             }
@@ -349,7 +355,7 @@ class DataService {
                                 ingredients.append(i.stringValue)
                             }
                             
-                            let result = Recipe(title: title, img: img, calories: calories, totalWeight: totalWeight, dietLabels: diet, healthLabel: health, ingredients: ingredients, isFavorite: false, servings: servings)
+                            let result = Recipe(title: title, img: img, calories: calories, totalWeight: totalWeight, dietLabels: diet, healthLabel: health, ingredients: ingredients, isFavorite: false, servings: servings, source: source, cuisineType: [], mealType: [], dishType: [])
                             
                             self.searchRecipes.append(result)
                         }

@@ -67,7 +67,7 @@ struct CustomTopTabBar: View {
 struct CustomTopTabBar_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { gr in
-            CustomTopTabBar(gr: gr, selection: .constant(-1), recipe: Recipe(title: "", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: [], ingredients: [], isFavorite: false, servings: 0))
+            CustomTopTabBar(gr: gr, selection: .constant(-1), recipe: Recipe(title: "", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: [], ingredients: [], isFavorite: false, servings: 0, source: "", cuisineType: [], mealType: [], dishType: []))
         }
     }
 }

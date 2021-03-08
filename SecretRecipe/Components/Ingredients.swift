@@ -44,7 +44,7 @@ struct Ingredients: View {
 struct Ingredients_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { gr in
-            Ingredients(gr: gr, recipe: Recipe(title: "", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: [], ingredients: [], isFavorite: false, servings: 0))
+            Ingredients(gr: gr, recipe: Recipe(title: "", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: [], ingredients: [], isFavorite: false, servings: 0, source: "", cuisineType: [], mealType: [], dishType: []))
         }
     }
 }

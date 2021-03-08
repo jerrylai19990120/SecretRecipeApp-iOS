@@ -23,10 +23,10 @@ struct Nutrients: View {
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: gr.size.height*0.023) {
-                Text("Follow the steps below:")
+                Text("See nutrients info below:")
                     .foregroundColor(mainTextColor)
                     .font(.system(size: gr.size.width*0.05, weight: .semibold, design: .rounded))
-                    .padding(.bottom)
+                    
                 
                 ForEach(self.nutrients, id: \.self){ nutrient in
                     Text("• \(nutrient.label): \(nutrient.quantity) \(nutrient.unit)")
@@ -45,7 +45,7 @@ struct Nutrients: View {
 struct Preparations_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { gr in
-            Nutrients(gr: gr, recipe: Recipe(title: "", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: [], ingredients: [], isFavorite: false, servings: 0), nutrients: [Nutrient(label: "", quantity: "", unit: "")])
+            Nutrients(gr: gr, recipe: Recipe(title: "", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: [], ingredients: [], isFavorite: false, servings: 0, source: "", cuisineType: [], mealType: [], dishType: []), nutrients: [Nutrient(label: "", quantity: "", unit: "")])
         }
     }
 }
