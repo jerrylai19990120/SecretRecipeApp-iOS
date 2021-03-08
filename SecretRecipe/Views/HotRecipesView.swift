@@ -66,7 +66,7 @@ struct HotRecipesView: View {
                     if self.hots.count != 0 {
                         ForEach(0..<self.hots.count, id: \.self){
                             i in
-                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$selection) {
+                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$selection) {
                                 Button(action: {
                                     self.selection = i
                                     self.popup.toggle()

@@ -28,7 +28,7 @@ struct CustomTopTabBar: View {
                 Button(action: {
                     self.selection = -1
                 }) {
-                    Text("Introduction")
+                    Text("Information")
                         .foregroundColor(selection == -1 ? activeColor : inactiveColor)
                 }
                 
@@ -46,7 +46,7 @@ struct CustomTopTabBar: View {
                 Button(action: {
                     self.selection = 1
                 }) {
-                    Text("Nutrition")
+                    Text("Nutrients")
                         .foregroundColor(selection == 1 ? activeColor : inactiveColor)
                 }
                 

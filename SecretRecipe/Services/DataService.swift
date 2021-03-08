@@ -25,6 +25,12 @@ class DataService {
     
     var searchRecipes = [Recipe]()
     
+    var nutrients = [[Nutrient]]()
+    
+    var hotNutrients = [[Nutrient]]()
+    
+    var trendingNutrients = [[Nutrient]]()
+    
     var mealType = ["Breakfast", "Lunch", "Dinner", "Snack", "Teatime"]
     
     var dishType = ["Alcohol-cocktail",
@@ -204,7 +210,11 @@ class DataService {
                         var health = [String]()
                         var diet = [String]()
                         var ingredients = [String]()
+                        var cuisine = [String]()
+                        var meal = [String]()
+                        var dish = [String]()
                         
+                        //recipe details
                         let calories = Int(Double(recipe["recipe"]["calories"].stringValue)!)
                         let totalWeight = Int(Double(recipe["recipe"]["totalWeight"].stringValue)!)
                         let title = recipe["recipe"]["label"].stringValue
@@ -213,7 +223,33 @@ class DataService {
                         let healthLbls = recipe["recipe"]["healthLabels"].array
                         let dietLbls = recipe["recipe"]["dietLabels"].array
                         let ingred = recipe["recipe"]["ingredientLines"].array
-                            
+                           
+                        let cuisineType = recipe["recipe"]["cuisineType"].array
+                        
+                        let mealType = recipe["recipe"]["mealType"].array
+                        
+                        let dishType = recipe["recipe"]["dishType"].array
+                        
+                        if let cuisineTypes = cuisineType {
+                            for i in cuisineTypes {
+                                cuisine.append(i.stringValue)
+                            }
+                        }
+                        
+                        if let mealTypes = mealType {
+                            for i in mealTypes {
+                                meal.append(i.stringValue)
+                            }
+                        }
+                        
+                        if let dishTypes = dishType {
+                            for i in dishTypes {
+                                dish.append(i.stringValue)
+                            }
+                        }
+                        
+                        
+                        
                         for i in healthLbls! {
                             health.append(i.stringValue)
                         }
@@ -225,6 +261,14 @@ class DataService {
                         for i in ingred! {
                             ingredients.append(i.stringValue)
                         }
+                        
+                        //extract nutrients info
+                        if isTrending {
+                            self.trendingNutrients.append(self.extractNutrient(recipe))
+                        } else {
+                            self.hotNutrients.append(self.extractNutrient(recipe))
+                        }
+                        
                             
                         let result = Recipe(title: title, img: img, calories: calories, totalWeight: totalWeight, dietLabels: diet, healthLabel: health, ingredients: ingredients, isFavorite: false, servings: servings)
                          
@@ -350,5 +394,135 @@ class DataService {
     }
     
     
+    
+}
+
+extension DataService {
+    
+    func extractNutrient(_ recipe: JSON)->[Nutrient]{
+        
+        var nutrients = [Nutrient]()
+        
+        let calcium = recipe["recipe"]["totalNutrients"]["CA"]
+        let carbs = recipe["recipe"]["totalNutrients"]["CHOCDF"]
+        let cholesterol = recipe["recipe"]["totalNutrients"]["CHOLE"]
+        let sugars = recipe["recipe"]["totalNutrients"]["SUGAR"]
+        let fat = recipe["recipe"]["totalNutrients"]["FAT"]
+        let trans = recipe["recipe"]["totalNutrients"]["FATRN"]
+        let iron = recipe["recipe"]["totalNutrients"]["FE"]
+        let potassium = recipe["recipe"]["totalNutrients"]["K"]
+        let magnesium = recipe["recipe"]["totalNutrients"]["MG"]
+        let sodium = recipe["recipe"]["totalNutrients"]["NA"]
+        let vitaB6 = recipe["recipe"]["totalNutrients"]["VITB6A"]
+        let energy = recipe["recipe"]["totalNutrients"]["ENERC_KCAL"]
+        let protein = recipe["recipe"]["totalNutrients"]["PROCNT"]
+        let saturated = recipe["recipe"]["totalNutrients"]["FASAT"]
+        let vitaE = recipe["recipe"]["totalNutrients"]["TOCPHA"]
+        let vitaA = recipe["recipe"]["totalNutrients"]["VITA_RAE"]
+        let vitaC = recipe["recipe"]["totalNutrients"]["VITC"]
+        let vitaD = recipe["recipe"]["totalNutrients"]["VITD"]
+        let vitaK = recipe["recipe"]["totalNutrients"]["VITK1"]
+        
+        if calcium["label"].stringValue != "" {
+            let calciumObj = Nutrient(label: calcium["label"].stringValue, quantity:String(format: "%.4f", calcium["quantity"].double!), unit: calcium["unit"].stringValue)
+            nutrients.append(calciumObj)
+        }
+        
+        if carbs["label"].stringValue != "" {
+            let carbsObj = Nutrient(label: carbs["label"].stringValue, quantity:String(format: "%.4f", carbs["quantity"].double!), unit: carbs["unit"].stringValue)
+            nutrients.append(carbsObj)
+        }
+        
+        if cholesterol["label"].stringValue != "" {
+            let cholesterolObj = Nutrient(label: cholesterol["label"].stringValue, quantity:String(format: "%.4f", cholesterol["quantity"].double!), unit: cholesterol["unit"].stringValue)
+            nutrients.append(cholesterolObj)
+        }
+        
+        if sugars["label"].stringValue != "" {
+            let sugarsObj = Nutrient(label: sugars["label"].stringValue, quantity:String(format: "%.4f", sugars["quantity"].double!), unit: sugars["unit"].stringValue)
+            nutrients.append(sugarsObj)
+        }
+        
+        if fat["label"].stringValue != "" {
+            let fatObj = Nutrient(label: fat["label"].stringValue, quantity:String(format: "%.4f", fat["quantity"].double!), unit: fat["unit"].stringValue)
+            nutrients.append(fatObj)
+        }
+        
+        if trans["label"].stringValue != "" {
+            let transObj = Nutrient(label: trans["label"].stringValue, quantity:String(format: "%.4f", trans["quantity"].double!), unit: trans["unit"].stringValue)
+            nutrients.append(transObj)
+        }
+        
+        if iron["label"].stringValue != "" {
+            let ironObj = Nutrient(label: iron["label"].stringValue, quantity:String(format: "%.4f", iron["quantity"].double!), unit: iron["unit"].stringValue)
+            nutrients.append(ironObj)
+        }
+        
+        if potassium["label"].stringValue != "" {
+            let potassiumObj = Nutrient(label: potassium["label"].stringValue, quantity:String(format: "%.4f", potassium["quantity"].double!), unit: potassium["unit"].stringValue)
+            nutrients.append(potassiumObj)
+        }
+        
+        if magnesium["label"].stringValue != "" {
+            let magnesiumObj = Nutrient(label: magnesium["label"].stringValue, quantity:String(format: "%.4f", magnesium["quantity"].double!), unit: magnesium["unit"].stringValue)
+            nutrients.append(magnesiumObj)
+        }
+        
+        if sodium["label"].stringValue != "" {
+            let sodiumObj = Nutrient(label: sodium["label"].stringValue, quantity:String(format: "%.4f", sodium["quantity"].double!), unit: sodium["unit"].stringValue)
+            nutrients.append(sodiumObj)
+        }
+        
+        if vitaB6["label"].stringValue != "" {
+            let vitaB6Obj = Nutrient(label: vitaB6["label"].stringValue, quantity:String(format: "%.4f", vitaB6["quantity"].double!), unit: vitaB6["unit"].stringValue)
+            nutrients.append(vitaB6Obj)
+        }
+        
+        if energy["label"].stringValue != "" {
+            let energyObj = Nutrient(label: energy["label"].stringValue, quantity:String(format: "%.4f", energy["quantity"].double!), unit: energy["unit"].stringValue)
+            nutrients.append(energyObj)
+        }
+        
+        if protein["label"].stringValue != "" {
+            let proteinObj = Nutrient(label: protein["label"].stringValue, quantity:String(format: "%.4f", protein["quantity"].double!), unit: protein["unit"].stringValue)
+            nutrients.append(proteinObj)
+        }
+        
+        if saturated["label"].stringValue != "" {
+            let saturatedObj = Nutrient(label: saturated["label"].stringValue, quantity:String(format: "%.4f", saturated["quantity"].double!), unit: saturated["unit"].stringValue)
+            nutrients.append(saturatedObj)
+            
+        }
+        
+        if vitaA["label"].stringValue != "" {
+            let vitaAObj = Nutrient(label: vitaA["label"].stringValue, quantity:String(format: "%.4f", vitaA["quantity"].double!), unit: vitaA["unit"].stringValue)
+            nutrients.append(vitaAObj)
+        }
+        
+        if vitaC["label"].stringValue != "" {
+            let vitaCObj = Nutrient(label: vitaC["label"].stringValue, quantity:String(format: "%.4f", vitaC["quantity"].double!), unit: vitaC["unit"].stringValue)
+            nutrients.append(vitaCObj)
+        }
+        
+        if vitaD["label"].stringValue != "" {
+            let vitaDObj = Nutrient(label: vitaD["label"].stringValue, quantity:String(format: "%.4f", vitaD["quantity"].double!), unit: vitaD["unit"].stringValue)
+            nutrients.append(vitaDObj)
+            
+        }
+        
+        if vitaK["label"].stringValue != "" {
+            let vitaKObj = Nutrient(label: vitaK["label"].stringValue, quantity:String(format: "%.4f", vitaK["quantity"].double!), unit: vitaK["unit"].stringValue)
+            nutrients.append(vitaKObj)
+        }
+        
+        if vitaE["label"].stringValue != "" {
+            let vitaEObj = Nutrient(label: vitaE["label"].stringValue, quantity:String(format: "%.4f", vitaE["quantity"].double!), unit: vitaE["unit"].stringValue)
+            nutrients.append(vitaEObj)
+        }
+        
+        
+        return nutrients
+        
+    }
     
 }

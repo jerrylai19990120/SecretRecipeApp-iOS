@@ -14,6 +14,8 @@ struct DetailComponent: View {
     
     var recipe: Recipe = Recipe(title: "No info", img: "", calories: 0, totalWeight: 0, dietLabels: [""], healthLabel: [""], ingredients: [""], isFavorite: false, servings: 0)
     
+    var nutrients: [Nutrient] = [Nutrient(label: "", quantity: "", unit: "")]
+    
     @State var selection = -1
     
     var body: some View {
@@ -54,7 +56,7 @@ struct DetailComponent: View {
                 CustomTopTabBar(gr: gr, selection: $selection, recipe: recipe)
                 
                 if selection == -1 {
-                    Introduction(gr: gr, recipe: recipe)
+                    Information(gr: gr, recipe: recipe)
                     
                 }
                 
@@ -63,7 +65,7 @@ struct DetailComponent: View {
                 }
                 
                 if selection == 1 {
-                    Instrutions(gr: gr, recipe: recipe)
+                    Nutrients(gr: gr, recipe: recipe, nutrients: self.nutrients)
                 }
 
             }

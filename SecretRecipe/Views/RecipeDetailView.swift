@@ -14,6 +14,8 @@ struct RecipeDetailView: View {
     
     var recipe: Recipe = Recipe(title: "No info", img: "", calories: 0, totalWeight: 0, dietLabels: [""], healthLabel: [""], ingredients: [""], isFavorite: false, servings: 0)
     
+    var nutrients: [Nutrient] = [Nutrient(label: "", quantity: "", unit: "")]
+    
     @State var selection = -1
     
     @Binding var popup: Bool
@@ -84,7 +86,7 @@ struct RecipeDetailView: View {
                         .offset(y: !popup ? gr.size.height+88 : -gr.size.height*0.4)
                         
                     
-                    DetailComponent(gr: gr, recipe: self.recipe).padding(.top, 40)
+                    DetailComponent(gr: gr, recipe: self.recipe, nutrients: self.nutrients).padding(.top, 40)
                         .offset(y: !popup ? gr.size.height+88 : -gr.size.height*0.18)
                         
                 }.animation(.default)

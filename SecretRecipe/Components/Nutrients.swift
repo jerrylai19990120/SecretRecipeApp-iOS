@@ -1,5 +1,5 @@
 //
-//  Introduction.swift
+//  Nutrients.swift
 //  SecretRecipe
 //
 //  Created by Jerry Lai on 2021-03-03.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct Introduction: View {
+struct Nutrients: View {
     
     var gr: GeometryProxy
     
@@ -16,22 +16,25 @@ struct Introduction: View {
     
     var mainTextColor = Color(red: 97/255, green: 106/255, blue: 140/255)
     
-    var intro = "This is my go-to chili recipe for everything from Frito pies to chili fries.  It can be left very basic or made more interesting with additions like chopped onions, kidney and pinto beans, and cans of diced tomatoes and chilies. "
-    
     var recipe: Recipe
+    
+    var nutrients: [Nutrient]
     
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            VStack(alignment: .leading) {
-                Text(recipe.title)
+            VStack(alignment: .leading, spacing: gr.size.height*0.023) {
+                Text("Follow the steps below:")
                     .foregroundColor(mainTextColor)
                     .font(.system(size: gr.size.width*0.05, weight: .semibold, design: .rounded))
                     .padding(.bottom)
-            
-                Text(intro)
-                    .foregroundColor(self.subTextColor)
+                
+                ForEach(self.nutrients, id: \.self){ nutrient in
+                    Text("• \(nutrient.label): \(nutrient.quantity) \(nutrient.unit)")
+                        .foregroundColor(self.subTextColor)
+                }
                 
                 Divider().padding([.top, .bottom])
+                
             }.padding()
         }.padding(.bottom, gr.size.height*0.4)
         .frame(width: gr.size.width)
@@ -39,10 +42,10 @@ struct Introduction: View {
     }
 }
 
-struct Introduction_Previews: PreviewProvider {
+struct Preparations_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { gr in
-            Introduction(gr: gr, recipe: Recipe(title: "", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: [], ingredients: [], isFavorite: false, servings: 0))
+            Nutrients(gr: gr, recipe: Recipe(title: "", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: [], ingredients: [], isFavorite: false, servings: 0), nutrients: [Nutrient(label: "", quantity: "", unit: "")])
         }
     }
 }
