@@ -16,6 +16,10 @@ struct SearchView: View {
     
     @State var results = [Recipe]()
     
+    @State var popup = false
+    
+    @State var selection: Int?
+    
     var body: some View {
         VStack {
             
@@ -31,9 +35,18 @@ struct SearchView: View {
                             CategoryRow(gr: self.gr, cate1: item.cate1, cate2: item.cate2, color1: item.color1, color2: item.color2, img1: item.img1, img2: item.img2, index1: item.index1, index2: item.index2)
                         }
                     } else {
-                        ForEach(self.results, id: \.self) {
-                            item in
-                            RecipeItem(gr: self.gr, img: item.img, title: item.title, calories: "\(item.calories)")
+                        ForEach(0..<self.results.count, id: \.self) {
+                            i in
+                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.results[i], nutrients: DataService.instance.searchNutrients[i], popup: self.$popup), tag: i, selection: self.$selection) {
+                                
+                                Button(action: {
+                                    self.selection = i
+                                    self.popup.toggle()
+                                }) {
+                                    RecipeItem(gr: self.gr, img: self.results[i].img, title: self.results[i].title, calories: "\(self.results[i].calories)")
+                                }
+                            }
+                            
                         }
                     }
                     

@@ -25,7 +25,9 @@ class DataService {
     
     var searchRecipes = [Recipe]()
     
-    var nutrients = [[Nutrient]]()
+    var searchNutrients = [[Nutrient]]()
+    
+    var categoryNutrients = [[Nutrient]]()
     
     var hotNutrients = [[Nutrient]]()
     
@@ -146,6 +148,8 @@ class DataService {
                         }
                         
                         let result = Recipe(title: title, img: img, calories: calories, totalWeight: totalWeight, dietLabels: diet, healthLabel: health, ingredients: ingredients, isFavorite: false, servings: servings, source: source, cuisineType: [], mealType: [], dishType: [])
+                        
+                        self.categoryNutrients.append(self.extractNutrient(recipe))
                         
                         self.categoryRecipes.append(result)
                         
@@ -358,6 +362,7 @@ class DataService {
                             let result = Recipe(title: title, img: img, calories: calories, totalWeight: totalWeight, dietLabels: diet, healthLabel: health, ingredients: ingredients, isFavorite: false, servings: servings, source: source, cuisineType: [], mealType: [], dishType: [])
                             
                             self.searchRecipes.append(result)
+                            self.searchNutrients.append(self.extractNutrient(recipe))
                         }
                         completion(true)
 

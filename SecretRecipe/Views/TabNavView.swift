@@ -39,7 +39,7 @@ struct TabNavView: View {
                     
                 }.navigationBarTitle("")
                 .navigationBarHidden(true)
-            }
+            }.accentColor(.white)
                 
                 
 

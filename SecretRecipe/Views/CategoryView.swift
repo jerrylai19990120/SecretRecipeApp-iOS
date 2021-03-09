@@ -54,7 +54,7 @@ struct CategoryView: View {
                         ForEach(0..<DataService.instance.categoryRecipes.count, id: \.self) {
                             i in
                             
-                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: DataService.instance.categoryRecipes[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$selection) {
+                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: DataService.instance.categoryRecipes[i], nutrients: DataService.instance.categoryNutrients[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$selection) {
                                 Button(action: {
                                     self.selection = i
                                     self.popup.toggle()

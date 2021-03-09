@@ -14,9 +14,9 @@ struct HomeView: View {
     
     var color = Color(red: 255/255, green: 195/255, blue: 60/255)
     
-    @State var hots: [Recipe] = [Recipe(title: "no info", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: ["no info"], ingredients: [""], isFavorite: false, servings: 0, source: "", cuisineType: [], mealType: [], dishType: [])]
+    @State var hots: [Recipe] = []
     
-    @State var trends: [Recipe] = [Recipe(title: "no info", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: ["no info"], ingredients: [""], isFavorite: false, servings: 0, source: "", cuisineType: [], mealType: [], dishType: [])]
+    @State var trends: [Recipe] = []
     
     @State var popup = false
     
@@ -65,7 +65,7 @@ struct HomeView: View {
                                 if self.trends.count <= 10 {
                                     ForEach(0..<self.trends.count, id: \.self){
                                         i in
-                                        NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$selection) {
+                                        NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$selection) {
                                             Button(action: {
                                                 self.selection = i
                                                 self.popup.toggle()
@@ -78,7 +78,7 @@ struct HomeView: View {
                                 } else {
                                     ForEach(0...9, id: \.self){
                                         i in
-                                        NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i+10, selection: self.$selection) {
+                                        NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i+10, selection: self.$selection) {
                                             Button(action: {
                                                 self.selection = i + 10
                                                 self.popup.toggle()
@@ -105,7 +105,7 @@ struct HomeView: View {
                                 ForEach(0..<self.hots.count, id: \.self){
                                     i in
                                     
-                                    NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: -i, selection: self.$selection) {
+                                    NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: -i, selection: self.$selection) {
                                         Button(action: {
                                             self.selection = -i
                                             self.popup.toggle()
@@ -117,7 +117,7 @@ struct HomeView: View {
                             } else {
                                 ForEach(0...9, id: \.self){
                                     i in
-                                    NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: -(i+10), selection: self.$selection) {
+                                    NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: -(i+10), selection: self.$selection) {
                                         Button(action: {
                                             self.selection = -(i + 10)
                                             self.popup.toggle()
@@ -147,6 +147,7 @@ struct HomeView: View {
             DataService.instance.getHotAndTrending(isTrending: false) { (success) in
                 self.hots = []
                 self.hots = DataService.instance.hotRecipes
+                
             }
         }
     }
