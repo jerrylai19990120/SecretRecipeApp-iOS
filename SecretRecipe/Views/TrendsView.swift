@@ -67,7 +67,7 @@ struct TrendsView: View {
                         ForEach(0..<self.trends.count, id: \.self){
                             i in
                             
-                             NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$selection) {
+                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$selection) {
                                 Button(action: {
                                     self.selection = i
                                     self.popup.toggle()
