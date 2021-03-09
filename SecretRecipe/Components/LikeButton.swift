@@ -25,13 +25,39 @@ struct LikeButton: View {
             .foregroundColor(.white)
             .frame(width: gr.size.width*0.07, height: gr.size.width*0.07)
             .onTapGesture {
-                self.isFavorite.toggle()
+                
                 var favors = DataService.instance.loadFavoriteRecipes()
                 var nutrition = DataService.instance.loadNutrients()
-                nutrition.append(self.nutrient)
-                favors.append(self.recipe)
-                DataService.instance.saveFavoriteRecipes(favors)
-                DataService.instance.saveNutrients(nutrition)
+                let hadDuplicate = favors.contains {
+                    element in
+                    if self.recipe.title == element.title {
+                        return true
+                    } else {
+                        return false
+                    }
+                }
+                
+                if self.isFavorite {
+                    self.isFavorite.toggle()
+                    let index = favors.firstIndex { element in
+                        element.title == self.recipe.title
+                    }
+                    favors.remove(at: index!)
+                    nutrition.remove(at: index!)
+                    
+                    DataService.instance.saveFavoriteRecipes(favors)
+                    DataService.instance.saveNutrients(nutrition)
+                } else if hadDuplicate {
+                    //do nothing
+                } else {
+                    self.isFavorite.toggle()
+                    nutrition.append(self.nutrient)
+                    favors.append(self.recipe)
+                    DataService.instance.saveFavoriteRecipes(favors)
+                    DataService.instance.saveNutrients(nutrition)
+                }
+                
+                
         }
     }
 }
