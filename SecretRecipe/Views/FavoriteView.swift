@@ -18,6 +18,8 @@ struct FavoriteView: View {
     
     @State var favorites = [Recipe]()
     
+    @State var nutrients = [[Nutrient]]()
+    
     var body: some View {
         VStack(spacing: 0) {
             ZStack {
@@ -67,12 +69,12 @@ struct FavoriteView: View {
                     } else {
                         ForEach(0..<self.favorites.count, id: \.self){
                             i in
-                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.favorites[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.favorites[i].isFavorite, recipe: self.favorites[i])), tag: i, selection: self.$tag) {
+                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.favorites[i], nutrients: self.nutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.favorites[i].isFavorite, recipe: self.favorites[i], nutrient: self.nutrients[i])), tag: i, selection: self.$tag) {
                                 Button(action: {
                                     self.tag = i
                                     
                                 }) {
-                                    FavoriteItem(gr: self.gr, title: self.favorites[i].title, desc: self.favorites.count != 0 ? self.favorites[i].healthLabel[0] : "Click to view recipe", img: self.favorites[i].img, calories: self.favorites[i].calories, weight: self.favorites[i].totalWeight, servings: self.favorites[i].servings)
+                                    FavoriteItem(gr: self.gr, title: self.favorites[i].title, desc: self.favorites[i].healthLabel.count != 0 ? self.favorites[i].healthLabel[0] : "Click to view recipe", img: self.favorites[i].img, calories: self.favorites[i].calories, weight: self.favorites[i].totalWeight, servings: self.favorites[i].servings)
                                 }
                             }.accentColor(.black)
                         }
@@ -87,7 +89,9 @@ struct FavoriteView: View {
         .frame(height: gr.size.height+gr.size.height*0.12)
             .onAppear {
                 self.favorites = []
+                self.nutrients = []
                 self.favorites = DataService.instance.loadFavoriteRecipes()
+                self.nutrients = DataService.instance.loadNutrients()
         }
     }
 }

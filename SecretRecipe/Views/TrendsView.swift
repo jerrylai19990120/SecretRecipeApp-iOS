@@ -65,7 +65,7 @@ struct TrendsView: View {
                         ForEach(0..<self.trends.count, id: \.self){
                             i in
                             
-                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.trends[i].isFavorite, recipe: self.trends[i])), tag: i, selection: self.$selection) {
+                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.trends[i].isFavorite, recipe: self.trends[i], nutrient: DataService.instance.trendingNutrients[i])), tag: i, selection: self.$selection) {
                                 Button(action: {
                                     self.selection = i
                                 }) {

@@ -63,7 +63,7 @@ struct HomeView: View {
                                 if self.trends.count <= 10 {
                                     ForEach(0..<self.trends.count, id: \.self){
                                         i in
-                                        NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.trends[i].isFavorite, recipe: self.trends[i])), tag: i, selection: self.$selection) {
+                                        NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.trends[i].isFavorite, recipe: self.trends[i], nutrient: DataService.instance.trendingNutrients[i])), tag: i, selection: self.$selection) {
                                             Button(action: {
                                                 self.selection = i
                                                
@@ -76,7 +76,7 @@ struct HomeView: View {
                                 } else {
                                     ForEach(0...9, id: \.self){
                                         i in
-                                        NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.trends[i].isFavorite, recipe: self.trends[i])), tag: i+10, selection: self.$selection) {
+                                        NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.trends[i].isFavorite, recipe: self.trends[i], nutrient: DataService.instance.trendingNutrients[i])), tag: i+10, selection: self.$selection) {
                                             Button(action: {
                                                 self.selection = i + 10
                                                 
@@ -103,7 +103,7 @@ struct HomeView: View {
                                 ForEach(0..<self.hots.count, id: \.self){
                                     i in
                                     
-                                    NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.hots[i].isFavorite, recipe: self.hots[i])), tag: -i, selection: self.$selection) {
+                                    NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.hots[i].isFavorite, recipe: self.hots[i], nutrient: DataService.instance.hotNutrients[i])), tag: -i, selection: self.$selection) {
                                         Button(action: {
                                             self.selection = -i
                                             
@@ -115,7 +115,7 @@ struct HomeView: View {
                             } else {
                                 ForEach(0...9, id: \.self){
                                     i in
-                                    NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.hots[i].isFavorite, recipe: self.hots[i])), tag: -(i+10), selection: self.$selection) {
+                                    NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.hots[i].isFavorite, recipe: self.hots[i], nutrient: DataService.instance.hotNutrients[i])), tag: -(i+10), selection: self.$selection) {
                                         Button(action: {
                                             self.selection = -(i + 10)
                                         }) {

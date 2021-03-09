@@ -40,43 +40,6 @@ struct RecipeDetailView: View {
                         .frame(width: gr.size.width, height: gr.size.height*0.5)
                     
                     
-                    /*VStack {
-                        
-                        HStack {
-                            NavigationLink(destination: TabNavView(selectionIndex: 0).navigationBarTitle("").navigationBarHidden(true), tag: 1, selection: $tag) {
-                                
-                                Button(action: {
-                                    self.tag = 1
-                                    self.popup.toggle()
-                                }) {
-                                    Image(systemName: "chevron.left")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .foregroundColor(.white)
-                                        .frame(width: gr.size.width*0.07, height: gr.size.width*0.07)
-                                }
-                                
-                            }.accentColor(.black)
-                            
-                                
-                            Spacer()
-                            Image(systemName: isFavorite ? "heart.fill" : "heart")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .foregroundColor(.white)
-                                .frame(width: gr.size.width*0.07, height: gr.size.width*0.07)
-                                .onTapGesture {
-                                    self.isFavorite.toggle()
-                                    var favors = DataService.instance.loadFavoriteRecipes()
-                                    favors.append(self.recipe)
-                                    DataService.instance.saveFavoriteRecipes(favors)
-                            }
-                        }.padding(.top, gr.size.height*0.1)
-                        
-                        Spacer()
-                    }.padding()*/
-                    
-                    
                 }.edgesIgnoringSafeArea(.top)
                 
                 

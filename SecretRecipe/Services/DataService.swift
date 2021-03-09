@@ -436,8 +436,17 @@ class DataService {
     
     //Save user favorite recipes to user default
     func saveFavoriteRecipes(_ recipes: [Recipe]){
+        
+        var temp = [Recipe]()
+        
+        for res in recipes {
+            let obj = Recipe(title: res.title, img: res.img, calories: res.calories, totalWeight: res.totalWeight, dietLabels: res.dietLabels, healthLabel: res.healthLabel, ingredients: res.ingredients, isFavorite: true, servings: res.servings, source: res.source, cuisineType: res.cuisineType, mealType: res.mealType, dishType: res.dishType)
+            
+            temp.append(obj)
+        }
+        
         let encoder = JSONEncoder()
-        if let encoded = try? encoder.encode(recipes) {
+        if let encoded = try? encoder.encode(temp) {
             let defaults = UserDefaults.standard
             defaults.set(encoded, forKey: "savedRecipes")
         }
@@ -458,7 +467,27 @@ class DataService {
         }
     }
     
+    //Save nutrition info to user default
+    func saveNutrients(_ nutrients: [[Nutrient]]){
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(nutrients){
+            let defaults = UserDefaults.standard
+            defaults.set(encoded, forKey: "savedNutrients")
+        }
+    }
     
+    //Load nutrition info
+    func loadNutrients()->[[Nutrient]]{
+        if let savedNutrients = UserDefaults.standard.object(forKey: "savedNutrients") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedNutrients = try? decoder.decode([[Nutrient]].self, from: savedNutrients){
+                return loadedNutrients
+            }
+            return []
+        } else {
+            return []
+        }
+    }
     
 }
 

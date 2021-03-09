@@ -16,6 +16,8 @@ struct LikeButton: View {
     
     var recipe: Recipe
     
+    var nutrient: [Nutrient]
+    
     var body: some View {
         Image(systemName: isFavorite ? "heart.fill" : "heart")
             .resizable()
@@ -25,8 +27,11 @@ struct LikeButton: View {
             .onTapGesture {
                 self.isFavorite.toggle()
                 var favors = DataService.instance.loadFavoriteRecipes()
+                var nutrition = DataService.instance.loadNutrients()
+                nutrition.append(self.nutrient)
                 favors.append(self.recipe)
                 DataService.instance.saveFavoriteRecipes(favors)
+                DataService.instance.saveNutrients(nutrition)
         }
     }
 }
@@ -34,7 +39,7 @@ struct LikeButton: View {
 struct LikeButton_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { gr in
-            LikeButton(gr: gr, isFavorite: true, recipe: Recipe(title: "", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: [], ingredients: [], isFavorite: true, servings: 0, source: "", cuisineType: [], mealType: [], dishType: []))
+            LikeButton(gr: gr, isFavorite: true, recipe: Recipe(title: "", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: [], ingredients: [], isFavorite: true, servings: 0, source: "", cuisineType: [], mealType: [], dishType: []), nutrient: [])
         }
     }
 }

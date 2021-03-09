@@ -52,7 +52,7 @@ struct CategoryView: View {
                         ForEach(0..<DataService.instance.categoryRecipes.count, id: \.self) {
                             i in
                             
-                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: DataService.instance.categoryRecipes[i], nutrients: DataService.instance.categoryNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: DataService.instance.categoryRecipes[i].isFavorite, recipe: DataService.instance.categoryRecipes[i])), tag: i, selection: self.$selection) {
+                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: DataService.instance.categoryRecipes[i], nutrients: DataService.instance.categoryNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: DataService.instance.categoryRecipes[i].isFavorite, recipe: DataService.instance.categoryRecipes[i], nutrient: DataService.instance.categoryNutrients[i])), tag: i, selection: self.$selection) {
                                 Button(action: {
                                     self.selection = i
                                     

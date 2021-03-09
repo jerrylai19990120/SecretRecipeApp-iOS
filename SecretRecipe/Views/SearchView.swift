@@ -35,7 +35,7 @@ struct SearchView: View {
                     } else {
                         ForEach(0..<self.results.count, id: \.self) {
                             i in
-                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.results[i], nutrients: DataService.instance.searchNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.results[i].isFavorite, recipe: self.results[i])), tag: i, selection: self.$selection) {
+                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.results[i], nutrients: DataService.instance.searchNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.results[i].isFavorite, recipe: self.results[i], nutrient: DataService.instance.searchNutrients[i])), tag: i, selection: self.$selection) {
                                 
                                 Button(action: {
                                     self.selection = i
