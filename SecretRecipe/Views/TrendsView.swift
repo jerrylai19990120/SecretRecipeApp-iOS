@@ -14,8 +14,6 @@ struct TrendsView: View {
     
     var color = Color(red: 255/255, green: 195/255, blue: 60/255)
     
-    @State var popup = false
-    
     @State var selection: Int?
     
     @State var trends: [Recipe] = [Recipe(title: "no info", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: ["no info"], ingredients: [""], isFavorite: false, servings: 0, source: "", cuisineType: [], mealType: [], dishType: [])]
@@ -67,10 +65,9 @@ struct TrendsView: View {
                         ForEach(0..<self.trends.count, id: \.self){
                             i in
                             
-                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$selection) {
+                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.trends[i].isFavorite, recipe: self.trends[i])), tag: i, selection: self.$selection) {
                                 Button(action: {
                                     self.selection = i
-                                    self.popup.toggle()
                                 }) {
                                     FavoriteItem(gr: self.gr, title: self.trends[i].title, desc: self.trends[i].healthLabel.count != 0 ? self.trends[i].healthLabel[0] : "Tap to view recipe", img: self.trends[i].img, calories: self.trends[i].calories, weight: self.trends[i].totalWeight, servings: self.trends[i].servings)
                                 }

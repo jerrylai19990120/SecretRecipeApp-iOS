@@ -16,8 +16,6 @@ struct SearchView: View {
     
     @State var results = [Recipe]()
     
-    @State var popup = false
-    
     @State var selection: Int?
     
     var body: some View {
@@ -37,11 +35,11 @@ struct SearchView: View {
                     } else {
                         ForEach(0..<self.results.count, id: \.self) {
                             i in
-                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.results[i], nutrients: DataService.instance.searchNutrients[i], popup: self.$popup), tag: i, selection: self.$selection) {
+                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.results[i], nutrients: DataService.instance.searchNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.results[i].isFavorite, recipe: self.results[i])), tag: i, selection: self.$selection) {
                                 
                                 Button(action: {
                                     self.selection = i
-                                    self.popup.toggle()
+                                    //self.popup.toggle()
                                 }) {
                                     RecipeItem(gr: self.gr, img: self.results[i].img, title: self.results[i].title, calories: "\(self.results[i].calories)")
                                 }

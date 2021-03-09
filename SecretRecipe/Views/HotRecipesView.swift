@@ -16,8 +16,6 @@ struct HotRecipesView: View {
     
     @State var hots: [Recipe] = [Recipe(title: "no info", img: "", calories: 0, totalWeight: 0, dietLabels: [], healthLabel: ["no info"], ingredients: [""], isFavorite: false, servings: 0, source: "", cuisineType: [], mealType: [], dishType: [])]
     
-    @State var popup = false
-    
     @State var selection: Int?
     
     var body: some View {
@@ -66,10 +64,10 @@ struct HotRecipesView: View {
                     if self.hots.count != 0 {
                         ForEach(0..<self.hots.count, id: \.self){
                             i in
-                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$selection) {
+                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.hots[i].isFavorite, recipe: self.hots[i])), tag: i, selection: self.$selection) {
                                 Button(action: {
                                     self.selection = i
-                                    self.popup.toggle()
+                                    
                                 }) {
                                     FavoriteItem(gr: self.gr, title: self.hots[i].title, desc: self.hots[i].healthLabel[0], img: self.hots[i].img, calories: self.hots[i].calories, weight: self.hots[i].totalWeight, servings: self.hots[i].servings)
                                 }

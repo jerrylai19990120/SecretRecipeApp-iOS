@@ -18,7 +18,7 @@ struct RecipeDetailView: View {
     
     @State var selection = -1
     
-    @Binding var popup: Bool
+    @State var popup: Bool = false
     
     @State var isFavorite = false
     
@@ -40,7 +40,8 @@ struct RecipeDetailView: View {
                         .frame(width: gr.size.width, height: gr.size.height*0.5)
                     
                     
-                    VStack {
+                    /*VStack {
+                        
                         HStack {
                             NavigationLink(destination: TabNavView(selectionIndex: 0).navigationBarTitle("").navigationBarHidden(true), tag: 1, selection: $tag) {
                                 
@@ -73,7 +74,7 @@ struct RecipeDetailView: View {
                         }.padding(.top, gr.size.height*0.1)
                         
                         Spacer()
-                    }.padding()
+                    }.padding()*/
                     
                     
                 }.edgesIgnoringSafeArea(.top)
@@ -98,9 +99,13 @@ struct RecipeDetailView: View {
         }.padding(.top, gr.size.height*0.46)
         .edgesIgnoringSafeArea(.top)
         .onAppear {
-                self.loadImage(imgUrl: self.recipe.img) { (success) in
+            self.popup = true
+            self.loadImage(imgUrl: self.recipe.img) { (success) in
                     
             }
+        }
+        .onDisappear {
+            self.popup = false
         }
         
     }
@@ -141,7 +146,7 @@ struct RecipeDetailView: View {
 struct RecipeDetailView_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { gr in
-            RecipeDetailView(gr: gr, popup: .constant(true))
+            RecipeDetailView(gr: gr)
         }
         
     }

@@ -14,8 +14,6 @@ struct CategoryView: View {
     
     var category = "Quickly"
     
-    @State var popup = false
-    
     @State var selection: Int?
     
     var body: some View {
@@ -54,10 +52,10 @@ struct CategoryView: View {
                         ForEach(0..<DataService.instance.categoryRecipes.count, id: \.self) {
                             i in
                             
-                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: DataService.instance.categoryRecipes[i], nutrients: DataService.instance.categoryNutrients[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$selection) {
+                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: DataService.instance.categoryRecipes[i], nutrients: DataService.instance.categoryNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: DataService.instance.categoryRecipes[i].isFavorite, recipe: DataService.instance.categoryRecipes[i])), tag: i, selection: self.$selection) {
                                 Button(action: {
                                     self.selection = i
-                                    self.popup.toggle()
+                                    
                                 }) {
                                     
                                     RecipeItem(gr: self.gr, img: DataService.instance.categoryRecipes[i].img, title: DataService.instance.categoryRecipes[i].title, calories: "\(DataService.instance.categoryRecipes[i].calories)")

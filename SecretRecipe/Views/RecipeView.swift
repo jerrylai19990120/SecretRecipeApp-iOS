@@ -14,9 +14,7 @@ struct RecipeView: View {
     
     var gr: GeometryProxy
     
-     @State var trends: [Recipe] = []
-    
-    @State var popup = false
+    @State var trends: [Recipe] = []
     
     @State var selection: Int?
     
@@ -54,10 +52,10 @@ struct RecipeView: View {
                         if self.trends.count <= 10 {
                             ForEach(0..<self.trends.count, id: \.self){
                                 i in
-                                NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$selection) {
+                                NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.trends[i].isFavorite, recipe: self.trends[i])), tag: i, selection: self.$selection) {
                                     Button(action: {
                                         self.selection = i
-                                        self.popup.toggle()
+                                        
                                     }) {
                                         RecipeItem(gr: self.gr, img: self.trends[i].img, title: self.trends[i].title, calories: "\(self.trends[i].calories)")
                                     }
@@ -68,10 +66,10 @@ struct RecipeView: View {
                             
                             ForEach(0...9, id: \.self){
                                 i in
-                                NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i+10, selection: self.$selection) {
+                                NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.trends[i].isFavorite, recipe: self.trends[i])), tag: i+10, selection: self.$selection) {
                                     Button(action: {
                                         self.selection = i + 10
-                                        self.popup.toggle()
+                                        
                                     }) {
                                         RecipeItem(gr: self.gr, img: self.trends[i].img, title: self.trends[i].title, calories: "\(self.trends[i].calories)")
                                     }

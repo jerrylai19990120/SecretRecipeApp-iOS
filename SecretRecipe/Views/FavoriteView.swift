@@ -14,8 +14,6 @@ struct FavoriteView: View {
     
     var color = Color(red: 255/255, green: 195/255, blue: 60/255)
     
-    @State var popup = false
-    
     @State var tag: Int?
     
     @State var favorites = [Recipe]()
@@ -69,10 +67,10 @@ struct FavoriteView: View {
                     } else {
                         ForEach(0..<self.favorites.count, id: \.self){
                             i in
-                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.favorites[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$tag) {
+                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.favorites[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.favorites[i].isFavorite, recipe: self.favorites[i])), tag: i, selection: self.$tag) {
                                 Button(action: {
                                     self.tag = i
-                                    self.popup.toggle()
+                                    
                                 }) {
                                     FavoriteItem(gr: self.gr, title: self.favorites[i].title, desc: self.favorites.count != 0 ? self.favorites[i].healthLabel[0] : "Click to view recipe", img: self.favorites[i].img, calories: self.favorites[i].calories, weight: self.favorites[i].totalWeight, servings: self.favorites[i].servings)
                                 }

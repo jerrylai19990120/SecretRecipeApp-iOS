@@ -18,8 +18,6 @@ struct HomeView: View {
     
     @State var trends: [Recipe] = []
     
-    @State var popup = false
-    
     @State var selection: Int?
     
     var body: some View {
@@ -65,10 +63,10 @@ struct HomeView: View {
                                 if self.trends.count <= 10 {
                                     ForEach(0..<self.trends.count, id: \.self){
                                         i in
-                                        NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i, selection: self.$selection) {
+                                        NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.trends[i].isFavorite, recipe: self.trends[i])), tag: i, selection: self.$selection) {
                                             Button(action: {
                                                 self.selection = i
-                                                self.popup.toggle()
+                                               
                                             }) {
                                                 LargeBanner(gr: self.gr, img: self.trends[i].img, title: self.trends[i].title, description: self.trends[i].healthLabel[0], calories: self.trends[i].calories, weight: self.trends[i].totalWeight, serving: self.trends[i].servings).padding(.bottom,self.gr.size.height*0.11)
                                                     .padding(.trailing)
@@ -78,10 +76,10 @@ struct HomeView: View {
                                 } else {
                                     ForEach(0...9, id: \.self){
                                         i in
-                                        NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: i+10, selection: self.$selection) {
+                                        NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.trends[i].isFavorite, recipe: self.trends[i])), tag: i+10, selection: self.$selection) {
                                             Button(action: {
                                                 self.selection = i + 10
-                                                self.popup.toggle()
+                                                
                                             }) {
                                                 LargeBanner(gr: self.gr, img: self.trends[i].img, title: self.trends[i].title, description: self.trends[i].healthLabel[0], calories: self.trends[i].calories, weight: self.trends[i].totalWeight, serving: self.trends[i].servings).padding(.bottom,self.gr.size.height*0.11)
                                                     .padding(.trailing)
@@ -105,10 +103,10 @@ struct HomeView: View {
                                 ForEach(0..<self.hots.count, id: \.self){
                                     i in
                                     
-                                    NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: -i, selection: self.$selection) {
+                                    NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.hots[i].isFavorite, recipe: self.hots[i])), tag: -i, selection: self.$selection) {
                                         Button(action: {
                                             self.selection = -i
-                                            self.popup.toggle()
+                                            
                                         }) {
                                             DailyHotRecipe(gr: self.gr, title: self.hots[i].title, desc: self.hots[i].healthLabel.joined(separator: ", "), img: self.hots[i].img)
                                         }
@@ -117,10 +115,9 @@ struct HomeView: View {
                             } else {
                                 ForEach(0...9, id: \.self){
                                     i in
-                                    NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i], popup: self.$popup).navigationBarTitle("").navigationBarHidden(true), tag: -(i+10), selection: self.$selection) {
+                                    NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.hots[i].isFavorite, recipe: self.hots[i])), tag: -(i+10), selection: self.$selection) {
                                         Button(action: {
                                             self.selection = -(i + 10)
-                                            self.popup.toggle()
                                         }) {
                                             DailyHotRecipe(gr: self.gr, title: self.hots[i].title, desc: self.hots[i].healthLabel.joined(separator: ", "), img: self.hots[i].img)
                                         }
