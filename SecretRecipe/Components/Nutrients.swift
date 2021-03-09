@@ -36,7 +36,7 @@ struct Nutrients: View {
                 Divider().padding([.top, .bottom])
                 
             }.padding()
-        }.padding(.bottom, gr.size.height*0.4)
+        }.padding(.bottom, gr.size.height*0.2)
         .frame(width: gr.size.width)
         .background(Color(red: 243/255, green: 245/255, blue: 249/255))
     }
