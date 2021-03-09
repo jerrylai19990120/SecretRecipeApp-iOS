@@ -123,6 +123,9 @@ class DataService {
                         var health = [String]()
                         var diet = [String]()
                         var ingredients = [String]()
+                        var cuisine = [String]()
+                        var meal = [String]()
+                        var dish = [String]()
                         
                         let calories = Int(Double(recipe["recipe"]["calories"].stringValue)!)
                         let totalWeight = Int(Double(recipe["recipe"]["totalWeight"].stringValue)!)
@@ -133,7 +136,31 @@ class DataService {
                         let dietLbls = recipe["recipe"]["dietLabels"].array
                         let ingred = recipe["recipe"]["ingredientLines"].array
                         
+                        let cuisineType = recipe["recipe"]["cuisineType"].array
+                        
+                        let mealType = recipe["recipe"]["mealType"].array
+                        
+                        let dishType = recipe["recipe"]["dishType"].array
+                        
                         let source = recipe["recipe"]["source"].stringValue
+                        
+                        if let cuisineTypes = cuisineType {
+                            for i in cuisineTypes {
+                                cuisine.append(i.stringValue)
+                            }
+                        }
+                        
+                        if let mealTypes = mealType {
+                            for i in mealTypes {
+                                meal.append(i.stringValue)
+                            }
+                        }
+                        
+                        if let dishTypes = dishType {
+                            for i in dishTypes {
+                                dish.append(i.stringValue)
+                            }
+                        }
                         
                         for i in healthLbls! {
                             health.append(i.stringValue)
@@ -147,7 +174,7 @@ class DataService {
                             ingredients.append(i.stringValue)
                         }
                         
-                        let result = Recipe(title: title, img: img, calories: calories, totalWeight: totalWeight, dietLabels: diet, healthLabel: health, ingredients: ingredients, isFavorite: false, servings: servings, source: source, cuisineType: [], mealType: [], dishType: [])
+                        let result = Recipe(title: title, img: img, calories: calories, totalWeight: totalWeight, dietLabels: diet, healthLabel: health, ingredients: ingredients, isFavorite: false, servings: servings, source: source, cuisineType: cuisine, mealType: meal, dishType: dish)
                         
                         self.categoryNutrients.append(self.extractNutrient(recipe))
                         
@@ -335,6 +362,9 @@ class DataService {
                             var health = [String]()
                             var diet = [String]()
                             var ingredients = [String]()
+                            var cuisine = [String]()
+                            var meal = [String]()
+                            var dish = [String]()
                             
                             let calories = Int(Double(recipe["recipe"]["calories"].stringValue)!)
                             let totalWeight = Int(Double(recipe["recipe"]["totalWeight"].stringValue)!)
@@ -345,7 +375,31 @@ class DataService {
                             let dietLbls = recipe["recipe"]["dietLabels"].array
                             let ingred = recipe["recipe"]["ingredientLines"].array
                             
+                            let cuisineType = recipe["recipe"]["cuisineType"].array
+                            
+                            let mealType = recipe["recipe"]["mealType"].array
+                            
+                            let dishType = recipe["recipe"]["dishType"].array
+                            
                             let source = recipe["recipe"]["source"].stringValue
+                            
+                            if let cuisineTypes = cuisineType {
+                                for i in cuisineTypes {
+                                    cuisine.append(i.stringValue)
+                                }
+                            }
+                            
+                            if let mealTypes = mealType {
+                                for i in mealTypes {
+                                    meal.append(i.stringValue)
+                                }
+                            }
+                            
+                            if let dishTypes = dishType {
+                                for i in dishTypes {
+                                    dish.append(i.stringValue)
+                                }
+                            }
                             
                             for i in healthLbls! {
                                 health.append(i.stringValue)
@@ -359,7 +413,7 @@ class DataService {
                                 ingredients.append(i.stringValue)
                             }
                             
-                            let result = Recipe(title: title, img: img, calories: calories, totalWeight: totalWeight, dietLabels: diet, healthLabel: health, ingredients: ingredients, isFavorite: false, servings: servings, source: source, cuisineType: [], mealType: [], dishType: [])
+                            let result = Recipe(title: title, img: img, calories: calories, totalWeight: totalWeight, dietLabels: diet, healthLabel: health, ingredients: ingredients, isFavorite: false, servings: servings, source: source, cuisineType: cuisine, mealType: meal, dishType: dish)
                             
                             self.searchRecipes.append(result)
                             self.searchNutrients.append(self.extractNutrient(recipe))

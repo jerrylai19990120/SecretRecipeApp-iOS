@@ -36,7 +36,11 @@ struct BannerCategory: View {
                     NavigationLink(destination: CategoryView(gr: gr, category: self.category).navigationBarTitle("").navigationBarHidden(true), tag: self.index, selection: self.$tag) {
                         
                         Button(action: {
-                            self.tag = self.index
+                            DataService.instance.getRecipesByCategory(self.category) { (success) in
+                                if success {
+                                    self.tag = self.index
+                                }
+                            }
                         }) {
                             VStack(spacing: 3) {
                                 Text("View More")
