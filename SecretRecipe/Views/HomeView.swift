@@ -12,8 +12,6 @@ struct HomeView: View {
     
     var gr: GeometryProxy
     
-    @Binding var isLoading: Bool
-    
     var color = Color(red: 255/255, green: 195/255, blue: 60/255)
     
     @State var hots: [Recipe] = []
@@ -117,14 +115,11 @@ struct HomeView: View {
                             self.trends = []
                             self.trends = DataService.instance.trendingRecipes
                             
-                            DataService.instance.getHotAndTrending(isTrending: false) { (success) in
-                                self.hots = []
-                                self.hots = DataService.instance.hotRecipes
-                                
-                                self.isLoading = false
-                                
-                            }
-
+                        }
+                        
+                        DataService.instance.getHotAndTrending(isTrending: false) { (success) in
+                            self.hots = []
+                            self.hots = DataService.instance.hotRecipes
                             
                         }
                         
@@ -138,7 +133,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { gr in
-            HomeView(gr: gr, isLoading: .constant(true))
+            HomeView(gr: gr)
         }
     }
 }

@@ -32,7 +32,7 @@ struct DetailComponent: View {
                 .padding(.leading, gr.size.width*0.08)
             
             
-            HStack(spacing: gr.size.width*0.08) {
+            HStack(spacing: gr.size.width*0.1) {
                 HStack {
                     Image(systemName: "star.fill")
                         .foregroundColor(.yellow)
@@ -40,12 +40,12 @@ struct DetailComponent: View {
                 }
                 
                 HStack {
-                    Image(systemName: "clock")
+                    Image(systemName: "square.stack.3d.up")
                         .foregroundColor(.blue)
                     Text("\(recipe.totalWeight) g")
                 }
                 HStack {
-                    Image(systemName: "lightbulb")
+                    Image(systemName: "number.circle.fill")
                         .foregroundColor(.orange)
                     Text("\(recipe.servings) servings")
                 }

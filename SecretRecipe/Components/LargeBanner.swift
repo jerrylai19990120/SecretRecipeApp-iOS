@@ -52,12 +52,12 @@ struct LargeBanner: View {
                     }
                     
                     HStack {
-                        Image(systemName: "clock")
+                        Image(systemName: "square.stack.3d.up")
                             .foregroundColor(.blue)
                         Text("\(weight) g")
                     }
                     HStack {
-                        Image(systemName: "lightbulb")
+                        Image(systemName: "number.circle.fill")
                             .foregroundColor(.orange)
                         Text("\(serving) servings")
                     }

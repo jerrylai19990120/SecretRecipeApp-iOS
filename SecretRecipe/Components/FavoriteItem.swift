@@ -55,13 +55,13 @@ struct FavoriteItem: View {
                     }
                     Spacer()
                     HStack {
-                        Image(systemName: "clock")
+                        Image(systemName: "square.stack.3d.up")
                             .foregroundColor(.blue)
                         Text("\(weight) g")
                     }
                     Spacer()
                     HStack {
-                        Image(systemName: "lightbulb")
+                        Image(systemName: "number.circle.fill")
                             .foregroundColor(.orange)
                         Text("\(servings) servings")
                     }
