@@ -12,6 +12,8 @@ struct HomeView: View {
     
     var gr: GeometryProxy
     
+    @Binding var isLoading: Bool
+    
     var color = Color(red: 255/255, green: 195/255, blue: 60/255)
     
     @State var hots: [Recipe] = []
@@ -20,13 +22,10 @@ struct HomeView: View {
     
     @State var selection: Int?
     
-    @State var loading1: Bool = true
-    
-    @State var loading2: Bool = true
-    
     var body: some View {
         
         ZStack {
+            
             VStack(spacing: 0) {
             
                 Header(gr: gr, color: color)
@@ -117,19 +116,20 @@ struct HomeView: View {
                         DataService.instance.getHotAndTrending(isTrending: true) { (success) in
                             self.trends = []
                             self.trends = DataService.instance.trendingRecipes
-                            self.loading1 = false
+                            
+                            DataService.instance.getHotAndTrending(isTrending: false) { (success) in
+                                self.hots = []
+                                self.hots = DataService.instance.hotRecipes
+                                
+                                self.isLoading = false
+                                
+                            }
+
+                            
                         }
-                        DataService.instance.getHotAndTrending(isTrending: false) { (success) in
-                            self.hots = []
-                            self.hots = DataService.instance.hotRecipes
-                            self.loading2 = false
-                        }
+                        
                 }
             
-            if loading1 || loading2 {
-                ActivityIndicator(gr: gr)
-                    .foregroundColor(color)
-            }
         }//ZStack
             
     }
@@ -138,7 +138,7 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         GeometryReader { gr in
-            HomeView(gr: gr)
+            HomeView(gr: gr, isLoading: .constant(true))
         }
     }
 }

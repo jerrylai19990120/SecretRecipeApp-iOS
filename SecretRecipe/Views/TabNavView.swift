@@ -12,14 +12,26 @@ struct TabNavView: View {
     
     @State var selectionIndex = 0
     
+    @State var isLoading: Bool = true
+    
     var body: some View {
         GeometryReader {
             gr in
             NavigationView {
                 ZStack {
                     
+                    if self.isLoading {
+                        ActivityIndicator(gr: gr)
+                            .foregroundColor(Color(red: 255/255, green: 195/255, blue: 60/255))
+                    }
+                    
                     if self.selectionIndex == 0 {
-                        HomeView(gr: gr)
+                        if self.isLoading {
+                            HomeView(gr: gr, isLoading: self.$isLoading).hidden()
+                        } else {
+                            HomeView(gr: gr, isLoading: self.$isLoading)
+                        }
+                        
                     }
                     
                     if self.selectionIndex == 1 {
