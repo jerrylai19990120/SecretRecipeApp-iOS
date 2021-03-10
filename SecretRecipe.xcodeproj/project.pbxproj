@@ -32,6 +32,7 @@
 		925B4E1625EED2BB00ECE13E /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B4E1525EED2BB00ECE13E /* FavoriteView.swift */; };
 		925B4E1825EED2C800ECE13E /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925B4E1725EED2C800ECE13E /* SearchView.swift */; };
 		929C681625F7E75A00CBBB69 /* LikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929C681525F7E75A00CBBB69 /* LikeButton.swift */; };
+		929C681A25F918FA00CBBB69 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929C681925F918FA00CBBB69 /* ActivityIndicator.swift */; };
 		92A1A94A25EEECE100FB64BB /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A1A94925EEECE100FB64BB /* CategoryItem.swift */; };
 		92A1A94C25EEFE0500FB64BB /* RecipeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A1A94B25EEFE0500FB64BB /* RecipeItem.swift */; };
 		92A1A94E25EF065200FB64BB /* BannerCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A1A94D25EF065200FB64BB /* BannerCategory.swift */; };
@@ -69,6 +70,7 @@
 		925B4E1525EED2BB00ECE13E /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
 		925B4E1725EED2C800ECE13E /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		929C681525F7E75A00CBBB69 /* LikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeButton.swift; sourceTree = "<group>"; };
+		929C681925F918FA00CBBB69 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		92A1A94925EEECE100FB64BB /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		92A1A94B25EEFE0500FB64BB /* RecipeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeItem.swift; sourceTree = "<group>"; };
 		92A1A94D25EF065200FB64BB /* BannerCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCategory.swift; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				92560C7725F095D800BC76D1 /* Ingredients.swift */,
 				92560C7925F095E500BC76D1 /* Nutrients.swift */,
 				929C681525F7E75A00CBBB69 /* LikeButton.swift */,
+				929C681925F918FA00CBBB69 /* ActivityIndicator.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				923A9D3425EDA7C2009D1D00 /* SceneDelegate.swift in Sources */,
 				922D8B8E25F2B5F000CA10F7 /* CategoryRowData.swift in Sources */,
 				92560C6C25F05A3900BC76D1 /* DataService.swift in Sources */,
+				929C681A25F918FA00CBBB69 /* ActivityIndicator.swift in Sources */,
 				923A9D3625EDA7C2009D1D00 /* TabNavView.swift in Sources */,
 				922D8B8A25F1ABE700CA10F7 /* CategoryView.swift in Sources */,
 				92560C7625F095CE00BC76D1 /* Information.swift in Sources */,
@@ -498,7 +502,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2.0;
+				CURRENT_PROJECT_VERSION = 1.2.1;
 				DEVELOPMENT_ASSET_PATHS = "\"SecretRecipe/Preview Content\"";
 				DEVELOPMENT_TEAM = 8L83CZ8839;
 				ENABLE_PREVIEWS = YES;
@@ -520,7 +524,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.2.0;
+				CURRENT_PROJECT_VERSION = 1.2.1;
 				DEVELOPMENT_ASSET_PATHS = "\"SecretRecipe/Preview Content\"";
 				DEVELOPMENT_TEAM = 8L83CZ8839;
 				ENABLE_PREVIEWS = YES;

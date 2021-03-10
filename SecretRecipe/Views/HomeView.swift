@@ -20,133 +20,118 @@ struct HomeView: View {
     
     @State var selection: Int?
     
+    @State var loading1: Bool = true
+    
+    @State var loading2: Bool = true
+    
     var body: some View {
-        VStack(spacing: 0) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 36)
-                    .fill(color)
-                    .frame(width: gr.size.width, height: gr.size.height*0.36)
-                HStack {
-                    Image("forkBg")
-                        .resizable()
-                        .renderingMode(.original)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: gr.size.width*0.2, height: gr.size.width*0.2)
-                        .rotationEffect(.degrees(45))
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    Image("pizzaBg")
-                        .resizable()
-                        .renderingMode(.original)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: gr.size.width*0.2, height: gr.size.width*0.2)
-                        .offset(y: -gr.size.height*0.028)
-                    Spacer()
-                }.padding()
-                .offset(y: gr.size.height*0.08)
-                
-                Text("What's New?")
-                    .foregroundColor(.white)
-                    .font(.custom("Chalkboard SE", size: gr.size.width*0.08))
-                    .offset(y: gr.size.height*0.07)
-                    
-            }
+        
+        ZStack {
+            VStack(spacing: 0) {
             
-            ScrollView(.vertical, showsIndicators: false) {
-                VStack{
-                    SubHeader(gr: gr, color: color, title: "Trends", subtitle: "View All")
+                Header(gr: gr, color: color)
                     
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            if self.trends.count != 0 {
-                                if self.trends.count <= 10 {
-                                    ForEach(0..<self.trends.count, id: \.self){
-                                        i in
-                                        NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.trends[i].isFavorite, recipe: self.trends[i], nutrient: DataService.instance.trendingNutrients[i])), tag: i, selection: self.$selection) {
-                                            Button(action: {
-                                                self.selection = i
-                                               
-                                            }) {
-                                                LargeBanner(gr: self.gr, img: self.trends[i].img, title: self.trends[i].title, description: self.trends[i].healthLabel[0], calories: self.trends[i].calories, weight: self.trends[i].totalWeight, serving: self.trends[i].servings).padding(.bottom,self.gr.size.height*0.11)
-                                                    .padding(.trailing)
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack{
+                        SubHeader(gr: gr, color: color, title: "Trends", subtitle: "View All")
+                            
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack {
+                                if self.trends.count != 0 {
+                                    if self.trends.count <= 10 {
+                                        ForEach(0..<self.trends.count, id: \.self){
+                                            i in
+                                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.trends[i].isFavorite, recipe: self.trends[i], nutrient: DataService.instance.trendingNutrients[i])), tag: i, selection: self.$selection) {
+                                                    Button(action: {
+                                                        self.selection = i
+                                                        
+                                                    }) {
+                                                        LargeBanner(gr: self.gr, img: self.trends[i].img, title: self.trends[i].title, description: self.trends[i].healthLabel[0], calories: self.trends[i].calories, weight: self.trends[i].totalWeight, serving: self.trends[i].servings).padding(.bottom,self.gr.size.height*0.11)
+                                                            .padding(.trailing)
+                                                    }
+                                                }.accentColor(.black)
                                             }
-                                        }.accentColor(.black)
-                                    }
-                                } else {
-                                    ForEach(0...9, id: \.self){
-                                        i in
-                                        NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.trends[i].isFavorite, recipe: self.trends[i], nutrient: DataService.instance.trendingNutrients[i])), tag: i+10, selection: self.$selection) {
-                                            Button(action: {
-                                                self.selection = i + 10
+                                        } else {
+                                            ForEach(0...9, id: \.self){
+                                                i in
+                                                NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.trends[i], nutrients: DataService.instance.trendingNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.trends[i].isFavorite, recipe: self.trends[i], nutrient: DataService.instance.trendingNutrients[i])), tag: i+10, selection: self.$selection) {
+                                                    Button(action: {
+                                                        self.selection = i + 10
+                                                        
+                                                    }) {
+                                                        LargeBanner(gr: self.gr, img: self.trends[i].img, title: self.trends[i].title, description: self.trends[i].healthLabel[0], calories: self.trends[i].calories, weight: self.trends[i].totalWeight, serving: self.trends[i].servings).padding(.bottom,self.gr.size.height*0.11)
+                                                            .padding(.trailing)
+                                                    }
+                                                }.accentColor(.black)
                                                 
-                                            }) {
-                                                LargeBanner(gr: self.gr, img: self.trends[i].img, title: self.trends[i].title, description: self.trends[i].healthLabel[0], calories: self.trends[i].calories, weight: self.trends[i].totalWeight, serving: self.trends[i].servings).padding(.bottom,self.gr.size.height*0.11)
-                                                    .padding(.trailing)
                                             }
-                                        }.accentColor(.black)
+                                        }
                                         
                                     }
+                                    
+                                    
+                                }.padding(.leading)
+                            }
+                            SubHeader(gr: gr, color: color, title: "Hot Recipes", subtitle: "More")
+                            
+                            
+                            VStack(alignment: .leading, spacing: gr.size.height*0.04) {
+                                if self.hots.count != 0 {
+                                    if self.hots.count <= 10 {
+                                        ForEach(0..<self.hots.count, id: \.self){
+                                            i in
+                                            
+                                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.hots[i].isFavorite, recipe: self.hots[i], nutrient: DataService.instance.hotNutrients[i])), tag: -i, selection: self.$selection) {
+                                                Button(action: {
+                                                    self.selection = -i
+                                                    
+                                                }) {
+                                                    DailyHotRecipe(gr: self.gr, title: self.hots[i].title, desc: self.hots[i].healthLabel.joined(separator: ", "), img: self.hots[i].img)
+                                                }
+                                            }.accentColor(.black)
+                                        }
+                                    } else {
+                                        ForEach(0...9, id: \.self){
+                                            i in
+                                            NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.hots[i].isFavorite, recipe: self.hots[i], nutrient: DataService.instance.hotNutrients[i])), tag: -(i+10), selection: self.$selection) {
+                                                Button(action: {
+                                                    self.selection = -(i + 10)
+                                                }) {
+                                                    DailyHotRecipe(gr: self.gr, title: self.hots[i].title, desc: self.hots[i].healthLabel.joined(separator: ", "), img: self.hots[i].img)
+                                                }
+                                            }.accentColor(.black)
+                                            
+                                        }
+                                    }
+                                    
                                 }
                                 
-                            }
-                        
+                            }.padding(.bottom, gr.size.height*0.05)
                             
-                        }.padding(.leading)
+                        }.padding()
                     }
-                    SubHeader(gr: gr, color: color, title: "Hot Recipes", subtitle: "More")
                     
-                    
-                    VStack(alignment: .leading, spacing: gr.size.height*0.04) {
-                        if self.hots.count != 0 {
-                            if self.hots.count <= 10 {
-                                ForEach(0..<self.hots.count, id: \.self){
-                                    i in
-                                    
-                                    NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.hots[i].isFavorite, recipe: self.hots[i], nutrient: DataService.instance.hotNutrients[i])), tag: -i, selection: self.$selection) {
-                                        Button(action: {
-                                            self.selection = -i
-                                            
-                                        }) {
-                                            DailyHotRecipe(gr: self.gr, title: self.hots[i].title, desc: self.hots[i].healthLabel.joined(separator: ", "), img: self.hots[i].img)
-                                        }
-                                    }.accentColor(.black)
-                                }
-                            } else {
-                                ForEach(0...9, id: \.self){
-                                    i in
-                                    NavigationLink(destination: RecipeDetailView(gr: self.gr, recipe: self.hots[i], nutrients: DataService.instance.hotNutrients[i]).navigationBarItems(trailing: LikeButton(gr: self.gr, isFavorite: self.hots[i].isFavorite, recipe: self.hots[i], nutrient: DataService.instance.hotNutrients[i])), tag: -(i+10), selection: self.$selection) {
-                                        Button(action: {
-                                            self.selection = -(i + 10)
-                                        }) {
-                                            DailyHotRecipe(gr: self.gr, title: self.hots[i].title, desc: self.hots[i].healthLabel.joined(separator: ", "), img: self.hots[i].img)
-                                        }
-                                    }.accentColor(.black)
-                                    
-                                }
-                            }
-                            
+                }.offset(y: -gr.size.height*0.12)
+                    .frame(height: gr.size.height+gr.size.height*0.12)
+                    .onAppear {
+                        DataService.instance.getHotAndTrending(isTrending: true) { (success) in
+                            self.trends = []
+                            self.trends = DataService.instance.trendingRecipes
+                            //self.loading1 = false
                         }
-                            
-                    }.padding(.bottom, gr.size.height*0.05)
-                    
-                }.padding()
-            }
+                        DataService.instance.getHotAndTrending(isTrending: false) { (success) in
+                            self.hots = []
+                            self.hots = DataService.instance.hotRecipes
+                            //self.loading2 = false
+                        }
+                }
             
-        }.offset(y: -gr.size.height*0.12)
-        .frame(height: gr.size.height+gr.size.height*0.12)
-        .onAppear {
-            DataService.instance.getHotAndTrending(isTrending: true) { (success) in
-                self.trends = []
-                self.trends = DataService.instance.trendingRecipes
-                
+            if loading1 || loading2 {
+                ActivityIndicator(gr: gr)
+                    .foregroundColor(color)
             }
-            DataService.instance.getHotAndTrending(isTrending: false) { (success) in
-                self.hots = []
-                self.hots = DataService.instance.hotRecipes
-                
-            }
-        }
+        }//ZStack
+            
     }
 }
 
@@ -194,6 +179,46 @@ struct SubHeader: View {
             return AnyView(TrendsView(gr: gr).navigationBarTitle("").navigationBarHidden(true))
         } else {
             return AnyView(HotRecipesView(gr: gr).navigationBarTitle("").navigationBarHidden(true))
+        }
+    }
+}
+
+struct Header: View {
+    
+    var gr: GeometryProxy
+    
+    var color: Color
+    
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 36)
+                .fill(color)
+                .frame(width: gr.size.width, height: gr.size.height*0.36)
+            HStack {
+                Image("forkBg")
+                    .resizable()
+                    .renderingMode(.original)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: gr.size.width*0.2, height: gr.size.width*0.2)
+                    .rotationEffect(.degrees(45))
+                Spacer()
+                Spacer()
+                Spacer()
+                Image("pizzaBg")
+                    .resizable()
+                    .renderingMode(.original)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: gr.size.width*0.2, height: gr.size.width*0.2)
+                    .offset(y: -gr.size.height*0.028)
+                Spacer()
+            }.padding()
+                .offset(y: gr.size.height*0.08)
+            
+            Text("What's New?")
+                .foregroundColor(.white)
+                .font(.custom("Chalkboard SE", size: gr.size.width*0.08))
+                .offset(y: gr.size.height*0.07)
+            
         }
     }
 }
