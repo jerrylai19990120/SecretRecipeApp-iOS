@@ -117,12 +117,12 @@ struct HomeView: View {
                         DataService.instance.getHotAndTrending(isTrending: true) { (success) in
                             self.trends = []
                             self.trends = DataService.instance.trendingRecipes
-                            //self.loading1 = false
+                            self.loading1 = false
                         }
                         DataService.instance.getHotAndTrending(isTrending: false) { (success) in
                             self.hots = []
                             self.hots = DataService.instance.hotRecipes
-                            //self.loading2 = false
+                            self.loading2 = false
                         }
                 }
             

@@ -19,9 +19,9 @@ struct ActivityIndicator: View {
         ForEach(0..<5) { index in
         Group {
             Circle()
-                .frame(width: self.gr.size.width / 5, height: self.gr.size.height / 5)
+                .frame(width: self.gr.size.width / 20, height: self.gr.size.width / 20)
             .scaleEffect(!self.isAnimating ? 1 - CGFloat(index) / 5 : 0.2 + CGFloat(index) / 5)
-                .offset(y: self.gr.size.width / 10 - self.gr.size.height / 2)
+                .offset(y: self.gr.size.width / 50 - self.gr.size.height / 10)
         }.frame(width: self.gr.size.width/2, height: self.gr.size.width/2)
             .rotationEffect(!self.isAnimating ? .degrees(0) : .degrees(360))
             .animation(Animation
